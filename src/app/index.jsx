@@ -1,18 +1,17 @@
-import 'react-native-gesture-handler';
+import { Redirect } from 'expo-router';
 
-import RootStack from './navigation';
-import React from 'react';
 import Constants from 'expo-constants';
 import { View } from 'react-native';
+import React from 'react';
 
-function App() {
-  return <RootStack />;
+function Home() {
+  return <Redirect href={'/(secureScreens)/'} />;
 }
 
-let AppEntryPoint = App;
+let AppEntryPoint = Home;
 
 if (Constants?.expoConfig?.extra?.storybookEnabled === 'true') {
-  const StorybookUI = require('./.storybook').default;
+  const StorybookUI = require('../../.storybook').default;
   AppEntryPoint = () => {
     return (
       <View style={{ flex: 1 }}>
