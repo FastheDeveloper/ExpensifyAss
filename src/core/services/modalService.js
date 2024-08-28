@@ -19,14 +19,11 @@ import {
   ModalProps,
 } from 'react-native';
 
-export const ModalsContext =
-  React.createContext <
-  TWithModal >
-  {
-    openModal: () => console.warn('openModal must be overriden'),
-    closeModal: () => console.warn('closeModal must be overriden'),
-    closeModalNoCallbackAction: () => console.warn('closeModal must be overriden'),
-  };
+export const ModalsContext = React.createContext({
+  openModal: () => console.warn('openModal must be overridden'),
+  closeModal: () => console.warn('closeModal must be overridden'),
+  closeModalNoCallbackAction: () => console.warn('closeModalNoCallbackAction must be overridden'),
+});
 
 /**
  * ModalsProvider component that handles state and callbacks for modals.
@@ -35,20 +32,17 @@ export const ModalsContext =
  */
 export const ModalsProvider = React.memo((props) => {
   const backHandler = useRef();
-  const [state, setState] =
-    useState <
-    StateModal >
-    {
-      isVisible: false,
-      component: <View />,
-      modalOptions: {
-        transparent: false,
-        onCloseCb: undefined,
-        showCloseButton: true,
-        animationType: 'slide',
-        modalConfig: {},
-      },
-    };
+  const [state, setState] = useState({
+    isVisible: false,
+    component: <View />,
+    modalOptions: {
+      transparent: false,
+      onCloseCb: undefined,
+      showCloseButton: true,
+      animationType: 'slide',
+      modalConfig: {},
+    },
+  });
 
   const openModal = useCallback((component, modalOptions) => {
     Keyboard.dismiss();

@@ -44,7 +44,7 @@
         "./src/lib/*"
       ],
       "~providers/*": [
-        "src/providers/*"
+        "./src/providers/*"
       ]
     },
     "moduleResolution": "node",
@@ -79,5 +79,5 @@
     "src/components/Button/AppButton.stories.jsx",
     "src/components/Button/AppButton.jsx",
     "src/providers/AuthProvider.jsx"
-  ]
+, "App.jsx"  ]
 }
