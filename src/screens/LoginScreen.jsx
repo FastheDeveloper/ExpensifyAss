@@ -20,7 +20,7 @@ const LoginScreen = () => {
     isSelected: false,
   });
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [showError, setShowError] = useState(false);
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () =>
       setIsKeyboardVisible(true)
@@ -35,6 +35,10 @@ const LoginScreen = () => {
     };
   }, []);
 
+  useEffect(() => {
+    handleEmailBlur(userDetails.email, setErrorMessage);
+  }, [userDetails.email]);
+
   const isFormValid = () => {
     return validateEmail(userDetails.email) && allFieldsFilled(userDetails);
   };
@@ -48,6 +52,7 @@ const LoginScreen = () => {
 
   const handleInputFocus = () => {
     setErrorMessage('');
+    setShowError(false);
   };
   return (
     <KeyboardAwareScrollView
@@ -63,10 +68,10 @@ const LoginScreen = () => {
           <InputField
             placeholder={'Email Address'}
             onChangeText={(text) => handleChange('email', text)}
-            onBlur={() => handleEmailBlur(userDetails.email, setErrorMessage)}
+            onBlur={() => setShowError(true)}
             onFocus={handleInputFocus}
           />
-          {errorMessage && <Text style={styles.emailError}>{errorMessage}</Text>}
+          {errorMessage && showError && <Text style={styles.emailError}>{errorMessage}</Text>}
           <InputField
             placeholder={'Password'}
             secureTextEntry
@@ -111,7 +116,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: '2%',
     alignItems: 'center',
-    marginVertical: '2%',
+    marginVertical: '5%',
   },
   row: {
     flexDirection: 'row',
