@@ -6,15 +6,19 @@ import { View, Text } from 'react-native';
 import AuthProvider from 'src/providers/AuthProvider';
 import StackNavigator from 'src/navigation/StackNavigator';
 import { ModalsProvider } from '~core/services/modalService';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 function App() {
   return (
-    <AuthProvider>
-      <NavigationContainer>
-        <ModalsProvider>
-          <StackNavigator />
-        </ModalsProvider>
-      </NavigationContainer>
-    </AuthProvider>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <NavigationContainer>
+          <ModalsProvider>
+            <StackNavigator />
+          </ModalsProvider>
+        </NavigationContainer>
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }
 
