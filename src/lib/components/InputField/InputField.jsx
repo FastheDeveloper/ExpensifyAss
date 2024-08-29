@@ -37,6 +37,7 @@ const InputField = ({ leftIcon, label, rightIcon, ...inputProps }) => {
 
             if (inputProps.onBlur) inputProps.onBlur();
           }}
+          autoCapitalize="none"
         />
 
         {(rightIcon || inputProps.secureTextEntry) && (
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
   },
   rightIcon: {
     marginRight: 8,
+    paddingHorizontal: '2%',
   },
   selectedField: {
     borderColor: APP_COLOR.MAIN_GREEN,

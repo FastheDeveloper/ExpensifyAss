@@ -24,28 +24,13 @@
     "baseUrl": ".",
     "isolatedModules": true,
     "jsx": "react",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "es2017"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "es2017"],
     "paths": {
-      "~/*": [
-        "*"
-      ],
-      "~core/*": [
-        "./src/core/*"
-      ],
-      "~components/*": [
-        "./src/lib/components/*"
-      ],
-      "~lib/*": [
-        "./src/lib/*"
-      ],
-      "~providers/*": [
-        "./src/providers/*"
-      ]
+      "~/*": ["*"],
+      "~core/*": ["./src/core/*"],
+      "~components/*": ["./src/lib/components/*"],
+      "~lib/*": ["./src/lib/*"],
+      "~providers/*": ["./src/providers/*"]
     },
     "moduleResolution": "node",
     "noEmit": true,
@@ -57,12 +42,7 @@
     "skipLibCheck": true,
     "target": "esnext"
   },
-  "exclude": [
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js"
-  ],
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"],
   "include": [
     "**/*.ts",
     "**/*.tsx",
@@ -78,6 +58,7 @@
     "src/components/InputField/InputField.jsx",
     "src/components/Button/AppButton.stories.jsx",
     "src/components/Button/AppButton.jsx",
-    "src/providers/AuthProvider.jsx"
-, "App.jsx"  ]
+    "src/providers/AuthProvider.jsx",
+    "App.jsx"
+  ]
 }

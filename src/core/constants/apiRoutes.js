@@ -1,5 +1,5 @@
 export const API_ROUTES = {
-  AUTHENTICATE_USER: '/Get',
-  GET_ALL_TRANSACTIONS: '/CreateTransaction',
-  CREATE_NEW_TRANSACTION: '/Authenticate',
+  GET_ALL_TRANSACTIONS: '/Get',
+  CREATE_NEW_TRANSACTION: '/CreateTransaction',
+  AUTHENTICATE_USER: '/Authenticate',
 };

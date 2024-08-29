@@ -10,9 +10,11 @@ import AppButton from '~components/Button/AppButton';
 import { CheckBox } from '~/src/lib/components/CheckBox/CheckBox';
 import { FONT_NAMES } from '~core/constants/fontConstants';
 import { validateEmail, allFieldsFilled, handleEmailBlur } from '~lib/utils/fieldValidators';
+import { useAuth } from '~providers/AuthProvider';
 
 const LoginScreen = () => {
   const { top, bottom, left } = useSafeAreaInsets();
+  const { authenticateUser, loading } = useAuth();
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [userDetails, setUserDetails] = useState({
     email: '',
@@ -70,6 +72,7 @@ const LoginScreen = () => {
             onChangeText={(text) => handleChange('email', text)}
             onBlur={() => setShowError(true)}
             onFocus={handleInputFocus}
+            keyboardType="email-address"
           />
           {errorMessage && showError && <Text style={styles.emailError}>{errorMessage}</Text>}
           <InputField
@@ -91,7 +94,12 @@ const LoginScreen = () => {
           <Text style={[styles.textStyle, { color: APP_COLOR.MAIN_GREEN }]}>Forgot password?</Text>
         </View>
         <View style={styles.buttonView}>
-          <AppButton label={'Sign in'} disabled={!isFormValid()} />
+          <AppButton
+            label={'Sign in'}
+            disabled={!isFormValid()}
+            onPress={() => authenticateUser(userDetails)}
+            loading={loading}
+          />
         </View>
       </View>
     </KeyboardAwareScrollView>
