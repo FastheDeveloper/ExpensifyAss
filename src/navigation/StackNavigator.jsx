@@ -4,6 +4,7 @@ import HomeScreen from 'src/screens/HomeScreen';
 import LoginScreen from 'src/screens/LoginScreen';
 import { useAuth } from '~providers/AuthProvider';
 import { Fragment } from 'react';
+
 const Stack = createStackNavigator();
 const options = {
   headerShown: false,

@@ -7,9 +7,9 @@ const AuthContext = createContext({
 
 export default function AuthProvider({ children }) {
   const [userSession, setUserSession] = useState({
-    user: {
-      id: 123,
-    },
+    // user: {
+    //   id: 123,
+    // },
   });
   const [isReady, setIsReady] = useState(true);
 
@@ -19,7 +19,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ userSession, isAuthenticated: !!userSession?.user, userId: userSession?.user.id }}>
+      value={{ userSession, isAuthenticated: !!userSession?.user, userId: userSession?.user?.id }}>
       {children}
     </AuthContext.Provider>
   );

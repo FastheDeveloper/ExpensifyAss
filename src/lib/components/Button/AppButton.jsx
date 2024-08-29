@@ -25,11 +25,11 @@ const AppButton = ({ loading, leftIcon, label, rightIcon, ...pressableProps }) =
       )}
     </>
   );
+
   return (
     <Pressable
       style={[styles.button, pressableProps.disabled ? styles.disabled : styles.enabled]}
-      {...pressableProps}
-      testID="testClick">
+      {...pressableProps}>
       {content}
     </Pressable>
   );
@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
   },
 
   enabled: {
-    backgroundColor: APP_COLOR.MAIN_GREEN, // bg-APP_COLOR-MAIN_GREEN (replace with your color)
+    backgroundColor: APP_COLOR.MAIN_GREEN,
   },
   disabled: {
-    backgroundColor: '#00FF00', // bg-APP_COLOR-ACCENT_GREEN (replace with your color)
+    backgroundColor: '#00FF00',
   },
 });
