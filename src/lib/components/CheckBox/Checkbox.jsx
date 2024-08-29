@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { APP_COLOR } from '~/src/core/constants/colorConstants';
 
 export const CheckBox = ({ onPress, selected }) => {
   const styles = StyleSheet.create({
@@ -16,16 +17,16 @@ export const CheckBox = ({ onPress, selected }) => {
       style={[
         styles.container,
         {
-          width: 30,
-          height: 30,
-          borderRadius: 8,
+          width: 20,
+          height: 20,
+          borderRadius: 3,
           justifyContent: 'center',
           alignItems: 'center',
         },
       ]}
       onPress={() => onPress()}
       activeOpacity={0.8}>
-      {selected && <FontAwesome name="check" size={20} />}
+      {selected && <FontAwesome name="check" size={15} color={APP_COLOR.MAIN_GREY} />}
     </TouchableOpacity>
   );
 };
