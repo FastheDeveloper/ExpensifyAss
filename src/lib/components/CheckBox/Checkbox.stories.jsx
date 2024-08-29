@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 
 import React from 'react';
-import { CheckBox } from './Checkbox';
+import { CheckBox } from './CheckBox';
 
 const CheckButton = {
   title: 'CheckBox',

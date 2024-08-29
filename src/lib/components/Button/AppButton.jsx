@@ -2,6 +2,7 @@ import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-nati
 import React, { ComponentProps } from 'react';
 import { APP_COLOR } from '~core/constants/colorConstants';
 import { FontAwesome } from '@expo/vector-icons';
+import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 
 const AppButton = ({ loading, leftIcon, label, rightIcon, ...pressableProps }) => {
   const content = loading ? (
@@ -41,24 +42,26 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: APP_COLOR.MAIN_GREEN,
-    borderRadius: 24,
+    borderRadius: 8,
     elevation: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 16,
-    width: '100%',
-    shadowColor: '#000',
-    shadowOffset: {
-      height: 2,
-      width: 0,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+
+    marginHorizontal: '2%',
+
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   height: 2,
+    //   width: 0,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
   },
   buttonText: {
     color: APP_COLOR.MAIN_WHITE,
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: 16,
+    fontFamily: FONT_NAMES.INTER_MEDIUM,
     textAlign: 'center',
   },
   loaderWrapper: {
@@ -78,6 +81,6 @@ const styles = StyleSheet.create({
     backgroundColor: APP_COLOR.MAIN_GREEN,
   },
   disabled: {
-    backgroundColor: '#00FF00',
+    backgroundColor: '#A9CABC',
   },
 });
