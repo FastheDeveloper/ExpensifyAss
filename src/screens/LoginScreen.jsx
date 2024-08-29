@@ -9,15 +9,20 @@ import InputField from '~components/InputField/InputField';
 import AppButton from '~components/Button/AppButton';
 import { CheckBox } from '~/src/lib/components/CheckBox/CheckBox';
 import { FONT_NAMES } from '~core/constants/fontConstants';
+import { validateEmail, allFieldsFilled, handleEmailBlur } from '~lib/utils/fieldValidators';
+import { useAuth } from '~providers/AuthProvider';
 
 const LoginScreen = () => {
   const { top, bottom, left } = useSafeAreaInsets();
+  const { authenticateUser, loading } = useAuth();
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [userDetails, setUserDetails] = useState({
     email: '',
     password: '',
     isSelected: false,
   });
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () =>
       setIsKeyboardVisible(true)
@@ -32,18 +37,30 @@ const LoginScreen = () => {
     };
   }, []);
 
+  useEffect(() => {
+    handleEmailBlur(userDetails.email, setErrorMessage);
+  }, [userDetails.email]);
+
+  const isFormValid = () => {
+    return validateEmail(userDetails.email) && allFieldsFilled(userDetails);
+  };
+
   const handleChange = (name, value) => {
     setUserDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
     }));
   };
-  // Derive `disable` based on the presence of email and password
-  const disable = !userDetails.email || !userDetails.password;
+
+  const handleInputFocus = () => {
+    setErrorMessage('');
+    setShowError(false);
+  };
   return (
     <KeyboardAwareScrollView
       style={{ backgroundColor: APP_COLOR.MAIN_WHITE }}
-      scrollEnabled={isKeyboardVisible}>
+      scrollEnabled={isKeyboardVisible}
+      showsVerticalScrollIndicator={false}>
       <View style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>
         <View style={styles.header}>
           <AppIcon height={95} width={96} />
@@ -53,7 +70,11 @@ const LoginScreen = () => {
           <InputField
             placeholder={'Email Address'}
             onChangeText={(text) => handleChange('email', text)}
+            onBlur={() => setShowError(true)}
+            onFocus={handleInputFocus}
+            keyboardType="email-address"
           />
+          {errorMessage && showError && <Text style={styles.emailError}>{errorMessage}</Text>}
           <InputField
             placeholder={'Password'}
             secureTextEntry
@@ -73,7 +94,12 @@ const LoginScreen = () => {
           <Text style={[styles.textStyle, { color: APP_COLOR.MAIN_GREEN }]}>Forgot password?</Text>
         </View>
         <View style={styles.buttonView}>
-          <AppButton label={'Sign in'} disabled={disable} />
+          <AppButton
+            label={'Sign in'}
+            disabled={!isFormValid()}
+            onPress={() => authenticateUser(userDetails)}
+            loading={loading}
+          />
         </View>
       </View>
     </KeyboardAwareScrollView>
@@ -98,7 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: '2%',
     alignItems: 'center',
-    marginVertical: '2%',
+    marginVertical: '5%',
   },
   row: {
     flexDirection: 'row',
@@ -114,5 +140,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginLeft: '2%',
     color: APP_COLOR.MAIN_GREY,
+  },
+  emailError: {
+    color: APP_COLOR.MAIN_RED,
+    paddingHorizontal: '2%',
+    fontFamily: FONT_NAMES.INTER_REGULAR,
+    fontSize: 12,
   },
 });

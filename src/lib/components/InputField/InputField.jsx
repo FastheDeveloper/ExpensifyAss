@@ -6,11 +6,12 @@ import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 
 const InputField = ({ leftIcon, label, rightIcon, ...inputProps }) => {
   const [hide, setHide] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
 
-      <View style={styles.inputContainer}>
+      <View style={[styles.inputContainer, isFocused && styles.selectedField]}>
         {leftIcon && (
           <View style={styles.leftIcon} testID="left-icon">
             <FontAwesome name={leftIcon} size={20} />
@@ -27,7 +28,16 @@ const InputField = ({ leftIcon, label, rightIcon, ...inputProps }) => {
           {...inputProps}
           placeholderTextColor={APP_COLOR.LIGHT_GREY}
           secureTextEntry={inputProps.secureTextEntry && !rightIcon ? hide : undefined}
-          testID="text-input"
+          onFocus={() => {
+            setIsFocused(true);
+            if (inputProps.onFocus) inputProps.onFocus();
+          }}
+          onBlur={() => {
+            setIsFocused(false);
+
+            if (inputProps.onBlur) inputProps.onBlur();
+          }}
+          autoCapitalize="none"
         />
 
         {(rightIcon || inputProps.secureTextEntry) && (
@@ -94,5 +104,9 @@ const styles = StyleSheet.create({
   },
   rightIcon: {
     marginRight: 8,
+    paddingHorizontal: '2%',
+  },
+  selectedField: {
+    borderColor: APP_COLOR.MAIN_GREEN,
   },
 });
