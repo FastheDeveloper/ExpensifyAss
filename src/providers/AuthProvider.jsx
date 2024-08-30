@@ -1,18 +1,18 @@
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import { useCallback } from 'react';
 import axios from 'axios';
 import { save, getValueFor, deleteKey } from '~lib/utils/secureStorage';
 import { API_ROUTES } from '~core/constants/apiRoutes';
 import { STORAGE_KEYS } from '~core/constants/asyncKeys';
-
+import { withModal } from '~core/services/modalService';
+import { Modal } from '~lib/components/Modal/Modal';
 const AuthContext = createContext();
-// LOGIC TO SAVE TOKEN TO storage
-// LOGIC TO MONITOR TIME(1HR50MIN) TO DELETE SAVED TOKEN FROM storage AND SET AUTHENICATION TO FALSE==> REDIRECT BACK TO LOGIN
+// error display on Login
 // CREATE transaction mProvider
 // creqte homescreen
 
-export default function AuthProvider({ children }) {
+function AuthProvider({ children, openModal }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [authToken, setAuthToken] = useState(null);
@@ -43,6 +43,40 @@ export default function AuthProvider({ children }) {
     checkAuthStatus();
   }, [checkAuthStatus]);
 
+  const handleAuthResponse = async (res, expiresAt, setAuthToken, setIsAuthenticated) => {
+    const ERROR_MESSAGES = {
+      401: 'Incorrect password. Please try again.',
+      402: 'Password is too short. Please use a longer password.',
+      404: 'Account does not exist. Please check your credentials.',
+    };
+
+    if (res.data.jsonCode === 200) {
+      try {
+        await Promise.all([
+          save(STORAGE_KEYS.AUTH_TOKEN, res.data.authToken),
+          save(STORAGE_KEYS.EXPIRES_AT, expiresAt.toISOString()),
+        ]);
+
+        setAuthToken(res.data.authToken);
+        setIsAuthenticated(true);
+        return true;
+      } catch (error) {
+        console.error('Error saving auth data:', error);
+        Alert.alert('Error', 'Failed to save authentication data. Please try again.');
+        return false;
+      }
+    } else {
+      const errorMessage =
+        ERROR_MESSAGES[res.data.jsonCode] || 'An unexpected error occurred. Please try again.';
+      openModal?.(<Modal text={errorMessage} isError />, {
+        transparent: true,
+        animationType: 'none',
+      });
+      // Alert.alert('Authentication Error', errorMessage);
+      return false;
+    }
+  };
+
   const authenticateUser = async (userDetails) => {
     const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000 + 50 * 60 * 1000); // 2 hours from now
     try {
@@ -51,14 +85,17 @@ export default function AuthProvider({ children }) {
         `${process.env.EXPO_PUBLIC_BASE_API_URL}${API_ROUTES.AUTHENTICATE_USER}?partnerName=${process.env.EXPO_PUBLIC_BASE_PARTNER_NAME}&partnerPassword=${process.env.EXPO_PUBLIC_BASE_PARTNER_PASSWORD}&partnerUserID=${userDetails.email}&partnerUserSecret=${userDetails.password}`
       );
 
-      await Promise.all([
-        save(STORAGE_KEYS.AUTH_TOKEN, res.data.authToken),
-        save(STORAGE_KEYS.EXPIRES_AT, expiresAt.toISOString()),
-      ]);
-
-      // Immediately update the state
-      setAuthToken(res.data.authToken);
-      setIsAuthenticated(true);
+      const isAuthenticated = await handleAuthResponse(
+        res,
+        expiresAt,
+        setAuthToken,
+        setIsAuthenticated
+      );
+      console.log(isAuthenticated);
+      if (!isAuthenticated) {
+        setAuthToken(null);
+        setIsAuthenticated(false);
+      }
     } catch (err) {
       console.error('Authentication error:', err);
       setIsAuthenticated(false);
@@ -97,6 +134,7 @@ export default function AuthProvider({ children }) {
   );
 }
 
+export default withModal(AuthProvider);
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

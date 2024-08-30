@@ -32,13 +32,13 @@ function App() {
 
   return (
     <SafeAreaProvider>
-      <AuthProvider>
-        <NavigationContainer>
-          <ModalsProvider>
+      <ModalsProvider>
+        <AuthProvider>
+          <NavigationContainer>
             <StackNavigator />
-          </ModalsProvider>
-        </NavigationContainer>
-      </AuthProvider>
+          </NavigationContainer>
+        </AuthProvider>
+      </ModalsProvider>
     </SafeAreaProvider>
   );
 }
