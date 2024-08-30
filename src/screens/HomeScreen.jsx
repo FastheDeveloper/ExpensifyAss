@@ -1,10 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
+import { useAuth } from '~providers/AuthProvider';
+
 const HomeScreen = () => {
+  const { logout } = useAuth();
+
   return (
-    <View>
-      <Text>HomeScreen</Text>
+    <View style={{ paddingTop: 100 }}>
+      <Text onPress={() => logout()}>HomeScreen</Text>
     </View>
   );
 };

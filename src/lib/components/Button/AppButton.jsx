@@ -47,16 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 16,
-
     marginHorizontal: '2%',
-
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   height: 2,
-    //   width: 0,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 3.84,
   },
   buttonText: {
     color: APP_COLOR.MAIN_WHITE,

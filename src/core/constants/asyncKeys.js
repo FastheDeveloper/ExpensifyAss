@@ -1,0 +1,5 @@
+export const STORAGE_KEYS = {
+  AUTH_TOKEN: 'AUTH_TOKEN',
+  EXPIRES_AT: 'EXPIRES_AT',
+  IS_NEW_USER: 'IS_NEW_USER',
+};

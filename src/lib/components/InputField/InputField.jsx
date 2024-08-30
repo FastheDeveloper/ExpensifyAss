@@ -1,6 +1,7 @@
 import { Pressable, Text, TextInput, View, StyleSheet } from 'react-native';
 import React, { ComponentProps, useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
+
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 

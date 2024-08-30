@@ -2,6 +2,7 @@ import { Keyboard, StyleSheet, Text, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import AppIcon from '~lib/assets/appIcon';
 import AppName from '~lib/assets/appName';
 import { APP_COLOR } from '~core/constants/colorConstants';
