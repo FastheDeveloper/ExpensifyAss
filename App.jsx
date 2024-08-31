@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Constants from 'expo-constants';
 import { View, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -13,7 +13,8 @@ import StackNavigator from 'src/navigation/StackNavigator';
 import { ModalsProvider } from '~core/services/modalService';
 import { FONT_NAMES } from '~core/constants/fontConstants';
 import { StatusBar } from 'expo-status-bar';
-
+import LottieView from 'lottie-react-native';
+import { APP_COLOR } from './src/core/constants/colorConstants';
 SplashScreen.preventAutoHideAsync();
 
 function App() {
@@ -22,7 +23,21 @@ function App() {
     [FONT_NAMES.INTER_REGULAR]: require('~lib/assets/fonts/InterRegular.ttf'),
     [FONT_NAMES.INTER_SEMIBOLD]: require('~lib/assets/fonts/InterSemiBold.ttf'),
   });
-
+  const [animationPlayed, setAnimationPlayed] = useState(false);
+  const LottieAnimation = () => {
+    return (
+      <LottieView
+        autoPlay
+        source={require('./src/lib/assets/json/splash.json')}
+        style={{
+          flex: 1,
+        }}
+        resizeMode="cover"
+        loop={false}
+        onAnimationFinish={() => setAnimationPlayed(true)}
+      />
+    );
+  };
   useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();
@@ -33,6 +48,9 @@ function App() {
     return <Text>Couldnt get fonts</Text>;
   }
 
+  if (!animationPlayed) {
+    return <LottieAnimation />;
+  }
   return (
     <SafeAreaProvider>
       <ModalsProvider>
