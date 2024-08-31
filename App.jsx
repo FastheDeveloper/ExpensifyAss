@@ -10,6 +10,7 @@ import AuthProvider from 'src/providers/AuthProvider';
 import StackNavigator from 'src/navigation/StackNavigator';
 import { ModalsProvider } from '~core/services/modalService';
 import { FONT_NAMES } from '~core/constants/fontConstants';
+import { StatusBar } from 'expo-status-bar';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,6 +37,7 @@ function App() {
         <AuthProvider>
           <NavigationContainer>
             <StackNavigator />
+            <StatusBar style="dark" />
           </NavigationContainer>
         </AuthProvider>
       </ModalsProvider>

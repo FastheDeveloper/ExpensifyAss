@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Platform, StyleSheet, View, Text, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Entypo from '@expo/vector-icons/Entypo';
+
 import { APP_COLOR } from '~core/constants/colorConstants';
 import { withModal } from '~core/services/modalService';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
