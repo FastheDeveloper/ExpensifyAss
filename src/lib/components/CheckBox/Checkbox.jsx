@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 
 export const CheckBox = ({ onPress, selected }) => {

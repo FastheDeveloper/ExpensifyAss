@@ -7,9 +7,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import AuthProvider from 'src/providers/AuthProvider';
+import TransactionProvider from 'src/providers/TransactionProvider';
+
 import StackNavigator from 'src/navigation/StackNavigator';
 import { ModalsProvider } from '~core/services/modalService';
 import { FONT_NAMES } from '~core/constants/fontConstants';
+import { StatusBar } from 'expo-status-bar';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -34,9 +37,12 @@ function App() {
     <SafeAreaProvider>
       <ModalsProvider>
         <AuthProvider>
-          <NavigationContainer>
-            <StackNavigator />
-          </NavigationContainer>
+          <TransactionProvider>
+            <NavigationContainer>
+              <StackNavigator />
+              <StatusBar style="dark" />
+            </NavigationContainer>
+          </TransactionProvider>
         </AuthProvider>
       </ModalsProvider>
     </SafeAreaProvider>

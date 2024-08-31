@@ -1,9 +1,14 @@
+import { Fragment } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import { BackButton } from '~components/Button/BackButton';
 import HomeScreen from 'src/screens/HomeScreen';
 import LoginScreen from 'src/screens/LoginScreen';
+import AddTransaction from 'src/screens/AddTransaction';
+import AllTransactionList from 'src/screens/AllTransactionList';
+import TransactionDetailScreen from 'src/screens/TransactionDetailScreen';
+
 import { useAuth } from '~providers/AuthProvider';
-import { Fragment } from 'react';
 
 const Stack = createStackNavigator();
 const options = {
@@ -27,6 +32,9 @@ export default function StackNavigator() {
         node: (
           <Fragment>
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="AddTransaction" component={AddTransaction} />
+            <Stack.Screen name="AllTransactionList" component={AddTransaction} />
+            <Stack.Screen name="TransactionDetailScreen" component={TransactionDetailScreen} />
           </Fragment>
         ),
       },

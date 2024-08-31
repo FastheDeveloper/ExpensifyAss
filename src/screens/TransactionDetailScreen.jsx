@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-const TransactionDetailScreen = () => {
+const TransactionDetailScreen = ({ route }) => {
+  const { item } = route.params;
   return (
-    <View>
-      <Text>TransactionDetailScreen</Text>
+    <View style={{ marginVertical: 50 }}>
+      <Text>{item.amount}</Text>
     </View>
   );
 };

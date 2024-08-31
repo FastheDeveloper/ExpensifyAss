@@ -8,7 +8,7 @@ import { withModal } from '~core/services/modalService';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import AppButton from '../Button/AppButton';
 
-export const Modal = withModal(({ closeModal, text, isError }) => {
+export const LoginModal = withModal(({ closeModal, text, isError, auth }) => {
   const insets = useSafeAreaInsets();
   const marginTop = Platform.select({
     ios: 115 + insets.top,
@@ -26,13 +26,15 @@ export const Modal = withModal(({ closeModal, text, isError }) => {
               { backgroundColor: isError ? APP_COLOR.MAIN_RED : APP_COLOR.MAIN_GREEN },
             ]}>
             <Entypo name={isError ? 'cross' : 'check'} size={80} color={APP_COLOR.MAIN_WHITE} />
-            {isError && <Text style={s.typeText}>ERROR</Text>}
+            {isError && <Text style={s.typeText}>Authentication failed</Text>}
           </View>
           <View style={s.bottomView}>
             <Text style={s.headerText}>{!isError ? 'Successful' : ''}</Text>
 
             <Text style={s.descriptionText}>{text}</Text>
-            <Text style={s.close}>CLOSE</Text>
+            <Text style={s.close} onPress={auth}>
+              Login
+            </Text>
           </View>
         </View>
       </Pressable>

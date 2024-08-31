@@ -1,7 +1,8 @@
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { ComponentProps } from 'react';
-import { APP_COLOR } from '~core/constants/colorConstants';
 import { FontAwesome } from '@expo/vector-icons';
+
+import { APP_COLOR } from '~core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 
 const AppButton = ({ loading, leftIcon, label, rightIcon, ...pressableProps }) => {

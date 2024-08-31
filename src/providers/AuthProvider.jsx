@@ -2,15 +2,14 @@ import { createContext, PropsWithChildren, useContext, useEffect, useState } fro
 import { ActivityIndicator, Alert } from 'react-native';
 import { useCallback } from 'react';
 import axios from 'axios';
+
 import { save, getValueFor, deleteKey } from '~lib/utils/secureStorage';
 import { API_ROUTES } from '~core/constants/apiRoutes';
 import { STORAGE_KEYS } from '~core/constants/asyncKeys';
 import { withModal } from '~core/services/modalService';
 import { Modal } from '~lib/components/Modal/Modal';
+
 const AuthContext = createContext();
-// error display on Login
-// CREATE transaction mProvider
-// creqte homescreen
 
 function AuthProvider({ children, openModal }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,6 +29,7 @@ function AuthProvider({ children, openModal }) {
 
       setIsAuthenticated(!!token && !hasExpired);
       setAuthToken(token);
+      console.log(token, ' Fas \n Fas', authToken);
     } catch (error) {
       console.error('Error checking auth status:', error);
       setIsAuthenticated(false);
@@ -46,7 +46,7 @@ function AuthProvider({ children, openModal }) {
   const handleAuthResponse = async (res, expiresAt, setAuthToken, setIsAuthenticated) => {
     const ERROR_MESSAGES = {
       401: 'Incorrect password. Please try again.',
-      402: 'Password is too short. Please use a longer password.',
+      402: 'Incorrect password. Please try again.',
       404: 'Account does not exist. Please check your credentials.',
     };
 
@@ -78,7 +78,7 @@ function AuthProvider({ children, openModal }) {
   };
 
   const authenticateUser = async (userDetails) => {
-    const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000 + 50 * 60 * 1000); // 2 hours from now
+    const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000 + 50 * 60 * 1000);
     try {
       setLoading(true);
       const res = await axios.get(
@@ -93,6 +93,7 @@ function AuthProvider({ children, openModal }) {
       );
       console.log(isAuthenticated);
       if (!isAuthenticated) {
+        console.log('Not auth');
         setAuthToken(null);
         setIsAuthenticated(false);
       }
