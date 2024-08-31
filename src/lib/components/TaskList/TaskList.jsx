@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: '2%',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.2,
     paddingHorizontal: '5%',
     borderColor: APP_COLOR.LIGHT_GREY,
     paddingBottom: '5%',
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   itemView: {
     marginVertical: '2%',
     marginHorizontal: '5%',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.2,
     borderColor: APP_COLOR.LIGHT_GREY,
     paddingBottom: '5%',
   },
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   merchantText: {
     fontFamily: FONT_NAMES.INTER_MEDIUM,

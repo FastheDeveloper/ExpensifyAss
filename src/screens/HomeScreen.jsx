@@ -95,11 +95,13 @@ const styles = StyleSheet.create({
     borderColor: APP_COLOR.LIGHT_GREY,
     borderRadius: 8,
     backgroundColor: APP_COLOR.MAIN_WHITE,
-    marginVertical: '5%',
+    // marginBottom: '1%',
+    marginTop: '5%',
   },
   addText: {
     fontFamily: FONT_NAMES.INTER_MEDIUM,
     fontSize: 16,
     color: APP_COLOR.MAIN_GREEN,
+    marginLeft: '2%',
   },
 });
