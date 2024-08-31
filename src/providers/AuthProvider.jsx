@@ -29,7 +29,7 @@ function AuthProvider({ children, openModal }) {
 
       setIsAuthenticated(!!token && !hasExpired);
       setAuthToken(token);
-      console.log(token);
+      console.log(token, ' Fas \n Fas', authToken);
     } catch (error) {
       console.error('Error checking auth status:', error);
       setIsAuthenticated(false);
@@ -78,7 +78,7 @@ function AuthProvider({ children, openModal }) {
   };
 
   const authenticateUser = async (userDetails) => {
-    const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000 + 50 * 60 * 1000); // 2 hours from now
+    const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000 + 50 * 60 * 1000);
     try {
       setLoading(true);
       const res = await axios.get(
@@ -93,6 +93,7 @@ function AuthProvider({ children, openModal }) {
       );
       console.log(isAuthenticated);
       if (!isAuthenticated) {
+        console.log('Not auth');
         setAuthToken(null);
         setIsAuthenticated(false);
       }
