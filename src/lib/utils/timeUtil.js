@@ -53,5 +53,4 @@ const formatDateTime = (date) => {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
-export { getRelativeTime, sortTransactionsByInsertedDate, formatDateTime };
-export default getGreeting;
+export { getRelativeTime, sortTransactionsByInsertedDate, formatDateTime, getGreeting };

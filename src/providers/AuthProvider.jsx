@@ -29,9 +29,7 @@ function AuthProvider({ children, openModal }) {
 
       setIsAuthenticated(!!token && !hasExpired);
       setAuthToken(token);
-      console.log(token, ' Fas \n Fas', authToken);
     } catch (error) {
-      console.error('Error checking auth status:', error);
       setIsAuthenticated(false);
       setAuthToken(null);
     } finally {
@@ -91,9 +89,7 @@ function AuthProvider({ children, openModal }) {
         setAuthToken,
         setIsAuthenticated
       );
-      console.log(isAuthenticated);
       if (!isAuthenticated) {
-        console.log('Not auth');
         setAuthToken(null);
         setIsAuthenticated(false);
       }

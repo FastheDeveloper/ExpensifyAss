@@ -8,7 +8,7 @@ import { useAuth } from '~providers/AuthProvider';
 import { useTransactions } from '~providers/TransactionProvider';
 import UserIcon from '~lib/assets/userIcon';
 import { APP_COLOR } from '~core/constants/colorConstants';
-import getGreeting, { formatDateTime } from '~lib/utils/greetingUtil';
+import { getGreeting, formatDateTime } from '~lib/utils/timeUtil';
 import { FONT_NAMES } from '../core/constants/fontConstants';
 
 import TaskList from '~components/TaskList/TaskList';
@@ -38,10 +38,7 @@ const HomeScreen = () => {
       </View>
       <Pressable
         style={styles.addTransaction}
-        onPress={
-          // () => addTransaction(newTask)
-          () => navigation.navigate('AddTransaction')
-        }>
+        onPress={() => navigation.navigate('AddTransaction')}>
         <Entypo name="circle-with-plus" size={24} color={APP_COLOR.MAIN_GREEN} />
         <Text style={styles.addText}>Add Transaction</Text>
       </Pressable>

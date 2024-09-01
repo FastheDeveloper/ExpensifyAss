@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTransactions } from '~providers/TransactionProvider';
-import getGreeting, { formatDateTime } from '~lib/utils/greetingUtil';
+import { getGreeting, formatDateTime } from '~lib/utils/timeUtil';
 
 const AddTransaction = () => {
   const { addTransaction } = useTransactions();

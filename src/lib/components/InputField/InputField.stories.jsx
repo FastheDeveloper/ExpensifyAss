@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+
 import InputField from './InputField';
 
 const InputFieldMeta = {
@@ -44,13 +45,5 @@ export const SafetyIconWithSecure = {
   args: {
     rightIcon: 'star',
     secureTextEntry: true,
-  },
-};
-
-export const BothIcon = {
-  args: {
-    rightIcon: 'star',
-    secureTextEntry: true,
-    leftIcon: 'user-circle',
   },
 };

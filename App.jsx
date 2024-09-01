@@ -15,9 +15,10 @@ import { FONT_NAMES } from '~core/constants/fontConstants';
 import { StatusBar } from 'expo-status-bar';
 import LottieView from 'lottie-react-native';
 import { APP_COLOR } from './src/core/constants/colorConstants';
-SplashScreen.preventAutoHideAsync();
 
 function App() {
+  SplashScreen.preventAutoHideAsync();
+
   const [loaded, error] = useFonts({
     [FONT_NAMES.INTER_MEDIUM]: require('~lib/assets/fonts/InterMedium.ttf'),
     [FONT_NAMES.INTER_REGULAR]: require('~lib/assets/fonts/InterRegular.ttf'),
