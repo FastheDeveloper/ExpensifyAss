@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { useTransactions } from '~providers/TransactionProvider';
-import { getGreeting, formatDateTime } from '~lib/utils/timeUtil';
+import { formatDateTime } from '~lib/utils/timeUtil';
 import { APP_COLOR } from '~core/constants/colorConstants';
 import { BackButton } from '~components/Button/BackButton';
 import { FONT_NAMES } from '~core/constants/fontConstants';

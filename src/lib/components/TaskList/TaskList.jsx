@@ -6,12 +6,11 @@ import { useTransactions } from '~providers/TransactionProvider';
 import { LoadingRow } from '~components/LoadingRows/LoadingRow';
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
-import { getGreeting, getRelativeTime, formatDateTime } from '~lib/utils/timeUtil';
+import { formatDateDisplay } from '~lib/utils/timeUtil';
 import EmptyIcon from '~lib/assets/emptyIcon';
 
 const TaskList = () => {
-  const { transactionList, loadingTransaction, filteredTransactionList, addTransaction } =
-    useTransactions();
+  const { loadingTransaction, filteredTransactionList } = useTransactions();
   const navigation = useNavigation();
 
   const formatAmount = (amount, currency) => {
@@ -36,7 +35,7 @@ const TaskList = () => {
             <Text numberOfLines={1} ellipsizeMode="middle" style={styles.merchantText}>
               {item.merchant}
             </Text>
-            <Text style={styles.dateText}>{getRelativeTime(item.inserted)}</Text>
+            <Text style={styles.dateText}>{formatDateDisplay(item.inserted)}</Text>
           </View>
           <Text
             style={[
@@ -78,7 +77,7 @@ const TaskList = () => {
     );
   }
 
-  if (transactionList.length === 0) {
+  if (filteredTransactionList.length === 0) {
     return (
       <View style={styles.transactionView}>
         <View style={styles.listHeaderView}>
