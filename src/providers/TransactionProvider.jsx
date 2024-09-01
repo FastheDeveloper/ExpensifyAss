@@ -6,7 +6,7 @@ import { API_ROUTES } from '~core/constants/apiRoutes';
 import { STORAGE_KEYS } from '~core/constants/asyncKeys';
 import { withModal } from '~core/services/modalService';
 import { sortTransactionsByInsertedDate } from '~lib/utils/timeUtil';
-import { Modal } from '~lib/components/Modal/Modal';
+import { TransactionModal } from '~lib/components/Modal/TransactionModal';
 import { LoginModal } from '~lib/components/Modal/LoginModal';
 import { useAuth } from './AuthProvider';
 
@@ -31,13 +31,40 @@ function TransactionProvider({ children, openModal, closeModal }) {
   useEffect(() => {
     // Update filteredTransactionList only when sortedTransactions changes
     setFilteredTransactionList(sortedTransactions);
-    // setLoadingTransactions(false);
   }, [sortedTransactions]);
 
-  const addTransaction = (newTransaction) => {
-    console.log('Adding');
-    // setLoadingTransactions(true);
-    setTransactionList((prevList) => [...prevList, newTransaction]);
+  const addTransaction = async (newTransaction, closeFunction) => {
+    try {
+      const res = await axios.get(
+        `${process.env.EXPO_PUBLIC_BASE_API_URL}${API_ROUTES.CREATE_NEW_TRANSACTION}?authToken=${authToken}&created=${newTransaction?.created}&amount=${newTransaction?.amount}&merchant=${newTransaction.merchant}`
+      );
+      console.log(res.data);
+      if (res.data.jsonCode === 200) {
+        setTransactionList((prevList) => [...prevList, newTransaction]);
+        openModal?.(
+          <TransactionModal
+            text={'Your transaction has been added suuccessfully'}
+            closeFunc={closeFunction}
+          />,
+          {
+            transparent: true,
+            animationType: 'none',
+          }
+        );
+      } else {
+        const errorMessage = 'Something went wrong';
+        openModal?.(<TransactionModal text={errorMessage} isError closeFunc={closeFunction} />, {
+          transparent: true,
+          animationType: 'none',
+        });
+      }
+    } catch (err) {
+      const errorMessage = 'Something went wrong';
+      openModal?.(<TransactionModal text={errorMessage} isError closeFunc={closeFunction} />, {
+        transparent: true,
+        animationType: 'none',
+      });
+    }
   };
 
   const handleAuthResponse = async (res) => {
@@ -59,8 +86,6 @@ function TransactionProvider({ children, openModal, closeModal }) {
       return false;
     }
   };
-
-  const sendTransactionToServer = () => {};
 
   const fetchAllTransactions = async () => {
     try {
