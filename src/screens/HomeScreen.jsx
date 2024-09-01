@@ -9,7 +9,7 @@ import { useTransactions } from '~providers/TransactionProvider';
 import UserIcon from '~lib/assets/userIcon';
 import { APP_COLOR } from '~core/constants/colorConstants';
 import { getGreeting, formatDateTime } from '~lib/utils/timeUtil';
-import { FONT_NAMES } from '../core/constants/fontConstants';
+import { FONT_NAMES } from '~core/constants/fontConstants';
 
 import TaskList from '~components/TaskList/TaskList';
 const HomeScreen = () => {
@@ -29,7 +29,7 @@ const HomeScreen = () => {
 
   return (
     <View style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>
-      {/* <Text onPress={() => logout()}>xc</Text> */}
+      {/* <Text onPress={() => logout()}>logout</Text> */}
       <View style={styles.header}>
         <View style={styles.headerIcon}>
           <UserIcon height={45} width={50} />

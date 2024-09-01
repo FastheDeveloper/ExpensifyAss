@@ -33,7 +33,7 @@ export default function StackNavigator() {
           <Fragment>
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="AddTransaction" component={AddTransaction} />
-            <Stack.Screen name="AllTransactionList" component={AddTransaction} />
+            <Stack.Screen name="AllTransactionList" component={AllTransactionList} />
             <Stack.Screen name="TransactionDetailScreen" component={TransactionDetailScreen} />
           </Fragment>
         ),

@@ -75,12 +75,14 @@ const LoginScreen = () => {
             onBlur={() => setShowError(true)}
             onFocus={handleInputFocus}
             keyboardType="email-address"
+            label={'\u200B'}
           />
           {errorMessage && showError && <Text style={styles.emailError}>{errorMessage}</Text>}
           <InputField
             placeholder={'Password'}
             secureTextEntry
             onChangeText={(text) => handleChange('password', text)}
+            label={'\u200B'}
           />
         </View>
         <View style={[styles.outerRow]}>

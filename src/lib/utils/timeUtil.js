@@ -59,4 +59,67 @@ const formatDateTime = (date) => {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
-export { getRelativeTime, sortTransactionsByInsertedDate, formatDateTime, getGreeting };
+function formatDateDisplay(dateString) {
+  // Parse the input date string
+  const date = new Date(dateString);
+
+  // Define arrays for month names and suffixes
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  const suffixes = ['st', 'nd', 'rd', 'th'];
+
+  // Get the day and determine the correct suffix
+  const day = date.getDate();
+  let suffix;
+  if (day >= 11 && day <= 13) {
+    suffix = 'th';
+  } else {
+    switch (day % 10) {
+      case 1:
+        suffix = 'st';
+        break;
+      case 2:
+        suffix = 'nd';
+        break;
+      case 3:
+        suffix = 'rd';
+        break;
+      default:
+        suffix = 'th';
+    }
+  }
+
+  // Format the date components
+  const formattedDay = `${day}${suffix}`;
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  // Format the time
+  let hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // Convert 0 to 12 for midnight
+
+  // Construct the final formatted string
+  return `${formattedDay} ${month} ,${year} at ${hours}:${minutes} ${ampm}`;
+}
+export {
+  getRelativeTime,
+  sortTransactionsByInsertedDate,
+  formatDateTime,
+  getGreeting,
+  formatDateDisplay,
+};

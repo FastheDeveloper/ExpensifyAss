@@ -33,41 +33,47 @@ function TransactionProvider({ children, openModal, closeModal }) {
     setFilteredTransactionList(sortedTransactions);
   }, [sortedTransactions]);
 
-  const addTransaction = async (newTransaction, closeFunction) => {
-    try {
-      const res = await axios.get(
-        `${process.env.EXPO_PUBLIC_BASE_API_URL}${API_ROUTES.CREATE_NEW_TRANSACTION}?authToken=${authToken}&created=${newTransaction?.created}&amount=${newTransaction?.amount}&merchant=${newTransaction.merchant}`
-      );
-      console.log(res.data);
-      if (res.data.jsonCode === 200) {
-        setTransactionList((prevList) => [...prevList, newTransaction]);
-        openModal?.(
-          <TransactionModal
-            text={'Your transaction has been added suuccessfully'}
-            closeFunc={closeFunction}
-          />,
-          {
-            transparent: true,
-            animationType: 'none',
-          }
-        );
-      } else {
-        const errorMessage = 'Something went wrong';
-        openModal?.(<TransactionModal text={errorMessage} isError closeFunc={closeFunction} />, {
+  const handleSetResponse = async (res, newTransaction, closeFunction) => {
+    const updatedAmount =
+      newTransaction.amount < 0
+        ? Math.abs(newTransaction.amount)
+        : -Math.abs(newTransaction.amount);
+    // Create the updated transaction object
+    const updatedTransaction = {
+      ...newTransaction,
+      amount: updatedAmount,
+    };
+
+    if (res.data.jsonCode === 200) {
+      setTransactionList((prevList) => [...prevList, updatedTransaction]);
+      openModal?.(
+        <TransactionModal
+          text={'Your transaction has been added suuccessfully'}
+          closeFunc={closeFunction}
+        />,
+        {
           transparent: true,
           animationType: 'none',
-        });
-      }
-    } catch (err) {
+        }
+      );
+      return true;
+    } else if (res.data.jsonCode === 407) {
+      openModal?.(<LoginModal text={'Please Login again'} isError auth={handleVerify} />, {
+        transparent: true,
+        animationType: 'none',
+      });
+    } else {
       const errorMessage = 'Something went wrong';
       openModal?.(<TransactionModal text={errorMessage} isError closeFunc={closeFunction} />, {
         transparent: true,
         animationType: 'none',
       });
+
+      return false;
     }
   };
 
-  const handleAuthResponse = async (res) => {
+  const handleGetResponse = async (res) => {
     if (res.data.jsonCode === 200) {
       setTransactionList(res.data?.transactionList);
       return true;
@@ -93,7 +99,7 @@ function TransactionProvider({ children, openModal, closeModal }) {
       const res = await axios.get(
         `${process.env.EXPO_PUBLIC_BASE_API_URL}${API_ROUTES.GET_ALL_TRANSACTIONS}?authToken=${authToken}&returnValueList=transactionList`
       );
-      handleAuthResponse(res);
+      handleGetResponse(res);
     } catch (err) {
       openModal?.(<Modal text={'Something went wrong'} isError />, {
         transparent: true,
@@ -104,6 +110,20 @@ function TransactionProvider({ children, openModal, closeModal }) {
     }
   };
 
+  const addTransaction = async (newTransaction, closeFunction) => {
+    try {
+      const res = await axios.get(
+        `${process.env.EXPO_PUBLIC_BASE_API_URL}${API_ROUTES.CREATE_NEW_TRANSACTION}?authToken=${authToken}&created=${newTransaction?.created}&amount=${newTransaction?.amount}&merchant=${newTransaction.merchant}`
+      );
+      handleSetResponse(res, newTransaction, closeFunction);
+    } catch (err) {
+      const errorMessage = 'Something went wrong';
+      openModal?.(<TransactionModal text={errorMessage} isError closeFunc={closeFunction} />, {
+        transparent: true,
+        animationType: 'none',
+      });
+    }
+  };
   return (
     <TransactionContext.Provider
       value={{

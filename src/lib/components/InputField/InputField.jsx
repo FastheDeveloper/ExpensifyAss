@@ -10,7 +10,7 @@ const InputField = ({ leftIcon, label, rightIcon, ...inputProps }) => {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      {label && <Text style={styles.label}>{label}</Text>}
 
       <View style={[styles.inputContainer, isFocused && styles.selectedField]}>
         {leftIcon && (
