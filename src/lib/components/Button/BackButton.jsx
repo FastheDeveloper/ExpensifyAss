@@ -1,23 +1,12 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { APP_COLOR } from '~/src/core/constants/colorConstants';
 
 export const BackButton = ({ onPress }) => {
   return (
-    <View style={styles.backButton}>
-      <Feather name="chevron-left" size={16} color="#007AFF" />
-      <Text style={styles.backButtonText} onPress={onPress}>
-        Back
-      </Text>
-    </View>
+    <Pressable onPress={onPress} style={styles.backButton}>
+      <Feather name="chevron-left" size={30} color={APP_COLOR.MAIN_DARK} />
+    </Pressable>
   );
 };
-const styles = StyleSheet.create({
-  backButton: {
-    flexDirection: 'row',
-    paddingLeft: 20,
-  },
-  backButtonText: {
-    color: '#007AFF',
-    marginLeft: 4,
-  },
-});
+const styles = StyleSheet.create({});

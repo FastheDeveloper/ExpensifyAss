@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
-    borderWidth: 0.2,
     borderColor: APP_COLOR.LIGHT_GREY,
     borderRadius: 8,
     backgroundColor: APP_COLOR.MAIN_WHITE,
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
   },
   merchantText: {
     fontFamily: FONT_NAMES.INTER_MEDIUM,
-    fontSize: '15%',
+    fontSize: 16,
     color: APP_COLOR.MAIN_DARK,
     marginBottom: '5%',
   },
@@ -178,7 +177,6 @@ const styles = StyleSheet.create({
   amount: {
     fontFamily: FONT_NAMES.INTER_MEDIUM,
     fontSize: 16,
-    fontSize: '15%',
   },
   headerText: {
     fontFamily: FONT_NAMES.INTER_SEMIBOLD,

@@ -68,9 +68,10 @@ const styles = StyleSheet.create({
     marginHorizontal: '2%',
   },
   label: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
+    fontSize: 16,
+    fontFamily: FONT_NAMES.INTER_MEDIUM,
+    marginVertical: 8,
+    color: APP_COLOR.MAIN_GREY,
   },
   inputContainer: {
     flexDirection: 'row',
