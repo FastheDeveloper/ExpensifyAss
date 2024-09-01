@@ -8,7 +8,7 @@ import AppName from '~lib/assets/appName';
 import { APP_COLOR } from '~core/constants/colorConstants';
 import InputField from '~components/InputField/InputField';
 import AppButton from '~components/Button/AppButton';
-import { CheckBox } from '~/src/lib/components/CheckBox/CheckBox';
+import { CheckBox } from '~/src/lib/components/CheckBox/Checkbox';
 import { FONT_NAMES } from '~core/constants/fontConstants';
 import { validateEmail, allFieldsFilled, handleEmailBlur } from '~lib/utils/fieldValidators';
 import { useAuth } from '~providers/AuthProvider';
@@ -57,6 +57,7 @@ const LoginScreen = () => {
     setErrorMessage('');
     setShowError(false);
   };
+
   return (
     <KeyboardAwareScrollView
       style={{ backgroundColor: APP_COLOR.MAIN_WHITE }}

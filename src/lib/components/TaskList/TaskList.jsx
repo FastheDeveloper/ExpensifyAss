@@ -6,8 +6,9 @@ import { useTransactions } from '~providers/TransactionProvider';
 import { LoadingRow } from '~components/LoadingRows/LoadingRow';
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
-import getGreeting, { getRelativeTime, formatDateTime } from '~lib/utils/greetingUtil';
+import { getGreeting, getRelativeTime, formatDateTime } from '~lib/utils/timeUtil';
 import EmptyIcon from '~lib/assets/emptyIcon';
+
 const TaskList = () => {
   const { transactionList, loadingTransaction, filteredTransactionList, addTransaction } =
     useTransactions();

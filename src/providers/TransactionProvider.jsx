@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
 import { ActivityIndicator, Alert, InteractionManager } from 'react-native';
 import axios from 'axios';
+
 import { API_ROUTES } from '~core/constants/apiRoutes';
 import { STORAGE_KEYS } from '~core/constants/asyncKeys';
 import { withModal } from '~core/services/modalService';
-import { sortTransactionsByInsertedDate } from '~lib/utils/greetingUtil';
+import { sortTransactionsByInsertedDate } from '~lib/utils/timeUtil';
 import { Modal } from '~lib/components/Modal/Modal';
 import { LoginModal } from '~lib/components/Modal/LoginModal';
-
 import { useAuth } from './AuthProvider';
 
 const TransactionContext = createContext();
@@ -27,6 +27,7 @@ function TransactionProvider({ children, openModal, closeModal }) {
       logout();
     });
   }, []);
+
   useEffect(() => {
     // Update filteredTransactionList only when sortedTransactions changes
     setFilteredTransactionList(sortedTransactions);
@@ -40,7 +41,6 @@ function TransactionProvider({ children, openModal, closeModal }) {
   };
 
   const handleAuthResponse = async (res) => {
-    console.log(res.data);
     if (res.data.jsonCode === 200) {
       setTransactionList(res.data?.transactionList);
       return true;
@@ -63,8 +63,6 @@ function TransactionProvider({ children, openModal, closeModal }) {
   const sendTransactionToServer = () => {};
 
   const fetchAllTransactions = async () => {
-    console.log('Fetching');
-
     try {
       setLoadingTransactions(true);
       const res = await axios.get(

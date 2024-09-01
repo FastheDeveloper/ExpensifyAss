@@ -1,7 +1,7 @@
-import AppButton from './AppButton';
-
 import React from 'react';
 import { View } from 'react-native';
+
+import AppButton from './AppButton';
 
 const AppButtonMeta = {
   title: 'Button',
@@ -15,7 +15,7 @@ const AppButtonMeta = {
   },
   decorators: [
     (Story) => (
-      <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+      <View style={{ justifyContent: 'center', flex: 1 }}>
         <Story />
       </View>
     ),

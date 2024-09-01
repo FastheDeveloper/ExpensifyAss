@@ -1,11 +1,9 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
-// @ts-ignore
 import { Animated, Text, View, Easing, StyleSheet } from 'react-native';
 
-import React from 'react';
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 
-// @ts-ignore
 const GlowView = ({ style, children }) => {
   const [glowAnim] = useState(new Animated.Value(0.3));
 
