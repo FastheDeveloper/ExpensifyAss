@@ -1,9 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
-import { ActivityIndicator, Alert, InteractionManager } from 'react-native';
+import { InteractionManager } from 'react-native';
 import axios from 'axios';
 
 import { API_ROUTES } from '~core/constants/apiRoutes';
-import { STORAGE_KEYS } from '~core/constants/asyncKeys';
 import { withModal } from '~core/services/modalService';
 import { sortTransactionsByInsertedDate } from '~lib/utils/timeUtil';
 import { TransactionModal } from '~lib/components/Modal/TransactionModal';

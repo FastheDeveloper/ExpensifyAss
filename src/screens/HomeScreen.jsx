@@ -1,5 +1,5 @@
-import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { useCallback, useState, useEffect } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Entypo from '@expo/vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
@@ -8,17 +8,15 @@ import { useAuth } from '~providers/AuthProvider';
 import { useTransactions } from '~providers/TransactionProvider';
 import UserIcon from '~lib/assets/userIcon';
 import { APP_COLOR } from '~core/constants/colorConstants';
-import { getGreeting, formatDateTime } from '~lib/utils/timeUtil';
+import { getGreeting } from '~lib/utils/timeUtil';
 import { FONT_NAMES } from '~core/constants/fontConstants';
-
 import TaskList from '~components/TaskList/TaskList';
+
 const HomeScreen = () => {
-  const { top, bottom, left } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const { logout } = useAuth();
-  const { addTransaction, fetchAllTransactions, setLoadingTransactions } = useTransactions();
+  const { fetchAllTransactions } = useTransactions();
   const navigation = useNavigation();
-  const now = new Date();
-  const formattedDateTime = formatDateTime(now);
 
   useEffect(() => {
     const getTransaction = async () => {

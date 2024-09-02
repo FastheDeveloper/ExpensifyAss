@@ -14,7 +14,6 @@ import { ModalsProvider } from '~core/services/modalService';
 import { FONT_NAMES } from '~core/constants/fontConstants';
 import { StatusBar } from 'expo-status-bar';
 import LottieView from 'lottie-react-native';
-import { APP_COLOR } from './src/core/constants/colorConstants';
 
 function App() {
   SplashScreen.preventAutoHideAsync();

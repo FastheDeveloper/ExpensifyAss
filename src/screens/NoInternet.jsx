@@ -7,7 +7,7 @@ import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import NoInternetSvg from '~lib/assets/noInternetIcon';
 
 const NoInternet = () => {
-  const { top, bottom, left } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
 
   return (
     <View style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>

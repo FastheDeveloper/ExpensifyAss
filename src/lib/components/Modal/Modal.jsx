@@ -6,7 +6,6 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { APP_COLOR } from '~core/constants/colorConstants';
 import { withModal } from '~core/services/modalService';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
-import AppButton from '~components/Button/AppButton';
 
 export const Modal = withModal(({ closeModal, text, isError, closeFunc, errorTitle }) => {
   const insets = useSafeAreaInsets();

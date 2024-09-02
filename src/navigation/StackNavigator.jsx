@@ -2,14 +2,13 @@ import { Fragment, useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import NetInfo from '@react-native-community/netinfo';
 
-import { BackButton } from '~components/Button/BackButton';
 import HomeScreen from 'src/screens/HomeScreen';
 import LoginScreen from 'src/screens/LoginScreen';
 import AddTransaction from 'src/screens/AddTransaction';
 import AllTransactionList from 'src/screens/AllTransactionList';
 import TransactionDetailScreen from 'src/screens/TransactionDetailScreen';
 import NoInternet from 'src/screens/NoInternet';
-import Onboarding from 'src/screens/Onboarding';
+import Onboarding from '~/src/screens/Onboarding';
 
 import { useAuth } from '~providers/AuthProvider';
 

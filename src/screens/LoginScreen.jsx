@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import AppIcon from '~lib/assets/appIcon';
 import AppName from '~lib/assets/appName';
 import { APP_COLOR } from '~core/constants/colorConstants';
-import InputField from '~components/InputField/InputField';
+import InputField from '~/src/lib/components/InputField/InputField';
 import AppButton from '~components/Button/AppButton';
 import { CheckBox } from '~/src/lib/components/CheckBox/Checkbox';
 import { FONT_NAMES } from '~core/constants/fontConstants';
@@ -14,7 +14,7 @@ import { validateEmail, allFieldsFilled, handleEmailBlur } from '~lib/utils/fiel
 import { useAuth } from '~providers/AuthProvider';
 
 const LoginScreen = () => {
-  const { top, bottom, left } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const { authenticateUser, loading } = useAuth();
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [userDetails, setUserDetails] = useState({
@@ -24,6 +24,7 @@ const LoginScreen = () => {
   });
   const [errorMessage, setErrorMessage] = useState('');
   const [showError, setShowError] = useState(false);
+
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () =>
       setIsKeyboardVisible(true)

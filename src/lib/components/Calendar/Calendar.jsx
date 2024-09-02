@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Calendar as RNCalendar } from 'react-native-calendars';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,7 +7,7 @@ import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { withModal } from '~/src/core/services/modalService';
 
 export const Calendar = withModal(({ onDateSelected, closeModal }) => {
-  const { top, bottom, left } = useSafeAreaInsets();
+  const { top } = useSafeAreaInsets();
   return (
     <Pressable
       style={{

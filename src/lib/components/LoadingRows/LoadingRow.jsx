@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Animated, Text, View, Easing, StyleSheet } from 'react-native';
+import { Animated, View, Easing, StyleSheet } from 'react-native';
 
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 

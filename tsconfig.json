@@ -46,6 +46,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+
     "src/constants/colorConstants.js",
     "src/app/index.jsx",
     "src/app/details.jsx",
@@ -58,7 +59,28 @@
     "src/components/InputField/InputField.jsx",
     "src/components/Button/AppButton.stories.jsx",
     "src/components/Button/AppButton.jsx",
-    "src/providers/AuthProvider.jsx",
-    "App.jsx"
+    "src/providers/AuthProvider.tsx",
+    "App.tsx",
+    "src/screens/AddTransaction.jsx",
+    "src/core/services/modalService.js",
+    "src/lib/components/Button/BackButton.jsx",
+    "src/lib/components/Button/AppButton.jsx",
+    "src/lib/components/Calendar/Calendar.jsx",
+    "src/lib/components/CheckBox/Checkbox.jsx",
+    "src/lib/components/InputField/InputField.jsx",
+    "src/lib/components/LoadingRows/LoadingRow.jsx",
+    "src/lib/components/Modal/LoginModal.jsx",
+    "src/lib/components/Modal/Modal.jsx",
+    "src/lib/components/Modal/TransactionModal.jsx",
+    "src/lib/components/TaskList/TaskList.jsx",
+    "src/navigation/StackNavigator.jsx",
+    "src/providers/TransactionProvider.jsx",
+    "src/screens/TransactionDetailScreen.jsx",
+    "src/screens/TransactionDetailScreen.jsx",
+    "src/screens/Onboarding.jsx",
+    "src/screens/NoInternet.jsx",
+    "src/screens/LoginScreen.jsx",
+    "src/screens/HomeScreen.jsx",
+    "src/screens/AllTransactionList.jsx"
   ]
 }

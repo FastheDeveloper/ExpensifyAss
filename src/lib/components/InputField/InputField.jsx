@@ -1,4 +1,4 @@
-import React, { ComponentProps, useState } from 'react';
+import React, { useState } from 'react';
 import { Pressable, Text, TextInput, View, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -8,6 +8,7 @@ import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 const InputField = ({ leftIcon, label, rightIcon, ...inputProps }) => {
   const [hide, setHide] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
+
   return (
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
