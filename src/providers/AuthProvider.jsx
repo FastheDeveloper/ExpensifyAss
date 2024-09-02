@@ -15,6 +15,7 @@ function AuthProvider({ children, openModal }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [authToken, setAuthToken] = useState(null);
+  const [hasBeenUsed, setHasBeenUsed] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const checkAuthStatus = useCallback(async () => {
@@ -36,6 +37,17 @@ function AuthProvider({ children, openModal }) {
       setIsLoading(false);
     }
   }, []);
+
+  const checkBeenUsed = useCallback(async () => {
+    try {
+      const usedApp = await getValueFor(STORAGE_KEYS.HAS_APP_BEEN_USED);
+      setHasBeenUsed(!!usedApp);
+    } catch (err) {}
+  }, []);
+
+  useEffect(() => {
+    checkBeenUsed();
+  }, [checkBeenUsed]);
 
   useEffect(() => {
     checkAuthStatus();
@@ -66,7 +78,10 @@ function AuthProvider({ children, openModal }) {
     } else {
       const errorMessage =
         ERROR_MESSAGES[res.data.jsonCode] || 'An unexpected error occurred. Please try again.';
-      openModal?.(<Modal text={errorMessage} isError />, {
+      const title = errorMessage.split('.')[0];
+      const message = errorMessage.split('.')[1];
+      console.log(title);
+      openModal?.(<Modal text={message} isError errorTitle={title} />, {
         transparent: true,
         animationType: 'none',
       });
@@ -125,6 +140,8 @@ function AuthProvider({ children, openModal }) {
         authenticateUser,
         logout,
         loading,
+        hasBeenUsed,
+        setHasBeenUsed,
       }}>
       {children}
     </AuthContext.Provider>

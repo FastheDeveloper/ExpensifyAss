@@ -8,39 +8,41 @@ import { withModal } from '~core/services/modalService';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import AppButton from '~components/Button/AppButton';
 
-export const TransactionModal = withModal(({ closeModal, text, isError, closeFunc }) => {
-  const insets = useSafeAreaInsets();
-  const marginTop = Platform.select({
-    ios: 115 + insets.top,
-    android: 115 + insets.top,
-    default: 0,
-  });
+export const TransactionModal = withModal(
+  ({ closeModal, text, isError, closeFunc, errorTitle }) => {
+    const insets = useSafeAreaInsets();
+    const marginTop = Platform.select({
+      ios: 115 + insets.top,
+      android: 115 + insets.top,
+      default: 0,
+    });
 
-  return (
-    <Fragment>
-      <Pressable style={s.root} onPress={closeFunc}>
-        <View style={[s.container, { marginVertical: marginTop * 1.4, marginHorizontal: '10%' }]}>
-          <View
-            style={[
-              s.topView,
-              { backgroundColor: isError ? APP_COLOR.MAIN_RED : APP_COLOR.MAIN_GREEN },
-            ]}>
-            <Entypo name={isError ? 'cross' : 'check'} size={80} color={APP_COLOR.MAIN_WHITE} />
-            {isError && <Text style={s.typeText}>ERROR</Text>}
-          </View>
-          <View style={s.bottomView}>
-            <Text style={s.headerText}>{!isError ? 'Successful' : ''}</Text>
+    return (
+      <Fragment>
+        <Pressable style={s.root} onPress={closeFunc}>
+          <View style={[s.container, { marginVertical: marginTop * 1.3, marginHorizontal: '10%' }]}>
+            <View
+              style={[
+                s.topView,
+                { backgroundColor: isError ? APP_COLOR.MAIN_RED : APP_COLOR.MAIN_GREEN },
+              ]}>
+              <Entypo name={isError ? 'cross' : 'check'} size={80} color={APP_COLOR.MAIN_WHITE} />
+              {isError && <Text style={s.typeText}>ERROR</Text>}
+            </View>
+            <View style={s.bottomView}>
+              <Text style={s.headerText}>{!isError ? 'Successful' : errorTitle}</Text>
 
-            <Text style={s.descriptionText}>{text}</Text>
-            <Text style={s.close} onPress={closeFunc}>
-              CLOSE
-            </Text>
+              <Text style={s.descriptionText}>{text}</Text>
+              <Text style={s.close} onPress={closeFunc}>
+                CLOSE
+              </Text>
+            </View>
           </View>
-        </View>
-      </Pressable>
-    </Fragment>
-  );
-});
+        </Pressable>
+      </Fragment>
+    );
+  }
+);
 
 const s = StyleSheet.create({
   border: {
@@ -64,7 +66,7 @@ const s = StyleSheet.create({
     flex: 1,
   },
   bottomView: {
-    marginTop: '10%',
+    marginTop: '5%',
     marginHorizontal: '12%',
     flex: 1,
     backgroundColor: APP_COLOR.MAIN_WHITE,
@@ -98,7 +100,8 @@ const s = StyleSheet.create({
     textAlign: 'center',
     color: APP_COLOR.LIGHT_GREY,
     fontSize: 16,
-    // marginBottom: '5%',
+    marginVertical: '5%',
+
     padding: '5%',
   },
 });

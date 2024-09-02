@@ -8,7 +8,7 @@ import { withModal } from '~core/services/modalService';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import AppButton from '~components/Button/AppButton';
 
-export const Modal = withModal(({ closeModal, text, isError, closeFunc }) => {
+export const Modal = withModal(({ closeModal, text, isError, closeFunc, errorTitle }) => {
   const insets = useSafeAreaInsets();
   const marginTop = Platform.select({
     ios: 115 + insets.top,
@@ -19,7 +19,7 @@ export const Modal = withModal(({ closeModal, text, isError, closeFunc }) => {
   return (
     <Fragment>
       <Pressable style={s.root} onPress={closeModal}>
-        <View style={[s.container, { marginVertical: marginTop * 1.4, marginHorizontal: '10%' }]}>
+        <View style={[s.container, { marginVertical: marginTop * 1.3, marginHorizontal: '10%' }]}>
           <View
             style={[
               s.topView,
@@ -29,7 +29,7 @@ export const Modal = withModal(({ closeModal, text, isError, closeFunc }) => {
             {isError && <Text style={s.typeText}>ERROR</Text>}
           </View>
           <View style={s.bottomView}>
-            <Text style={s.headerText}>{!isError ? 'Successful' : ''}</Text>
+            <Text style={s.headerText}>{!isError ? 'Successful' : errorTitle}</Text>
 
             <Text style={s.descriptionText}>{text}</Text>
             <Text style={s.close} onPress={closeFunc}>

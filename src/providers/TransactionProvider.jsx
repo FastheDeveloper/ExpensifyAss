@@ -9,6 +9,7 @@ import { sortTransactionsByInsertedDate } from '~lib/utils/timeUtil';
 import { TransactionModal } from '~lib/components/Modal/TransactionModal';
 import { LoginModal } from '~lib/components/Modal/LoginModal';
 import { useAuth } from './AuthProvider';
+import { Modal } from '~lib/components/Modal/Modal';
 
 const TransactionContext = createContext();
 
@@ -48,7 +49,7 @@ function TransactionProvider({ children, openModal, closeModal }) {
       setTransactionList((prevList) => [...prevList, updatedTransaction]);
       openModal?.(
         <TransactionModal
-          text={'Your transaction has been added suuccessfully'}
+          text={'Your transaction has been added successfully'}
           closeFunc={closeFunction}
         />,
         {
@@ -58,16 +59,32 @@ function TransactionProvider({ children, openModal, closeModal }) {
       );
       return true;
     } else if (res.data.jsonCode === 407) {
-      openModal?.(<LoginModal text={'Please Login again'} isError auth={handleVerify} />, {
-        transparent: true,
-        animationType: 'none',
-      });
+      openModal?.(
+        <LoginModal
+          text={'Please Login again'}
+          isError
+          auth={handleVerify}
+          errorTitle={'Failed to Add Transaction'}
+        />,
+        {
+          transparent: true,
+          animationType: 'none',
+        }
+      );
     } else {
-      const errorMessage = 'Something went wrong';
-      openModal?.(<TransactionModal text={errorMessage} isError closeFunc={closeFunction} />, {
-        transparent: true,
-        animationType: 'none',
-      });
+      const errorMessage = 'Please try again!';
+      openModal?.(
+        <TransactionModal
+          text={errorMessage}
+          isError
+          closeFunc={closeFunction}
+          errorTitle={'Failed to Add Transaction'}
+        />,
+        {
+          transparent: true,
+          animationType: 'none',
+        }
+      );
 
       return false;
     }
@@ -78,16 +95,27 @@ function TransactionProvider({ children, openModal, closeModal }) {
       setTransactionList(res.data?.transactionList);
       return true;
     } else if (res.data.jsonCode === 407) {
-      openModal?.(<LoginModal text={'Please Login again'} isError auth={handleVerify} />, {
-        transparent: true,
-        animationType: 'none',
-      });
+      openModal?.(
+        <LoginModal
+          text={'Please Login again'}
+          isError
+          auth={handleVerify}
+          errorTitle={'Token expired'}
+        />,
+        {
+          transparent: true,
+          animationType: 'none',
+        }
+      );
     } else {
       const errorMessage = 'Something went wrong';
-      openModal?.(<Modal text={errorMessage} isError />, {
-        transparent: true,
-        animationType: 'none',
-      });
+      openModal?.(
+        <Modal text={errorMessage} isError errorTitle={'Failed to fetch transactions'} />,
+        {
+          transparent: true,
+          animationType: 'none',
+        }
+      );
 
       return false;
     }
@@ -101,10 +129,13 @@ function TransactionProvider({ children, openModal, closeModal }) {
       );
       handleGetResponse(res);
     } catch (err) {
-      openModal?.(<Modal text={'Something went wrong'} isError />, {
-        transparent: true,
-        animationType: 'none',
-      });
+      openModal?.(
+        <Modal text={'Something went wrong'} isError errorTitle={'Failed to fetch transactions'} />,
+        {
+          transparent: true,
+          animationType: 'none',
+        }
+      );
     } finally {
       setLoadingTransactions(false);
     }
@@ -117,11 +148,19 @@ function TransactionProvider({ children, openModal, closeModal }) {
       );
       handleSetResponse(res, newTransaction, closeFunction);
     } catch (err) {
-      const errorMessage = 'Something went wrong';
-      openModal?.(<TransactionModal text={errorMessage} isError closeFunc={closeFunction} />, {
-        transparent: true,
-        animationType: 'none',
-      });
+      const errorMessage = 'Try again!';
+      openModal?.(
+        <TransactionModal
+          text={errorMessage}
+          isError
+          closeFunc={closeFunction}
+          errorTitle={'Failed to Add Transaction'}
+        />,
+        {
+          transparent: true,
+          animationType: 'none',
+        }
+      );
     }
   };
   return (

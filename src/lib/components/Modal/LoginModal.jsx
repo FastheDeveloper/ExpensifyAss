@@ -8,7 +8,7 @@ import { withModal } from '~core/services/modalService';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import AppButton from '~components/Button/AppButton';
 
-export const LoginModal = withModal(({ closeModal, text, isError, auth }) => {
+export const LoginModal = withModal(({ closeModal, text, isError, auth, errorTitle }) => {
   const insets = useSafeAreaInsets();
   const marginTop = Platform.select({
     ios: 115 + insets.top,
@@ -19,7 +19,7 @@ export const LoginModal = withModal(({ closeModal, text, isError, auth }) => {
   return (
     <Fragment>
       <Pressable style={s.root} onPress={closeModal}>
-        <View style={[s.container, { marginVertical: marginTop * 1.4, marginHorizontal: '10%' }]}>
+        <View style={[s.container, { marginVertical: marginTop * 1.3, marginHorizontal: '10%' }]}>
           <View
             style={[
               s.topView,
@@ -29,7 +29,7 @@ export const LoginModal = withModal(({ closeModal, text, isError, auth }) => {
             {isError && <Text style={s.typeText}>Authentication failed</Text>}
           </View>
           <View style={s.bottomView}>
-            <Text style={s.headerText}>{!isError ? 'Successful' : ''}</Text>
+            <Text style={s.headerText}>{!isError ? 'Successful' : errorTitle}</Text>
 
             <Text style={s.descriptionText}>{text}</Text>
             <Text style={s.close} onPress={auth}>
@@ -64,7 +64,7 @@ const s = StyleSheet.create({
     flex: 1,
   },
   bottomView: {
-    marginTop: '10%',
+    marginTop: '5%',
     marginHorizontal: '12%',
     flex: 1,
     backgroundColor: APP_COLOR.MAIN_WHITE,
@@ -80,7 +80,7 @@ const s = StyleSheet.create({
     textAlign: 'center',
     color: APP_COLOR.MAIN_DARK,
     fontSize: 14,
-    marginBottom: '10%',
+    marginBottom: '5%',
   },
   headerText: {
     fontFamily: FONT_NAMES.INTER_SEMIBOLD,
@@ -98,7 +98,8 @@ const s = StyleSheet.create({
     textAlign: 'center',
     color: APP_COLOR.LIGHT_GREY,
     fontSize: 16,
-    // marginBottom: '5%',
+    marginVertical: '5%',
+
     padding: '5%',
   },
 });

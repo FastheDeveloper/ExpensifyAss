@@ -22,7 +22,6 @@ const TransactionDetailScreen = ({ route }) => {
     const displayCurrency = currency === 'USD' ? '$' : currency;
     return `${amount < 0 ? '-' : ''}${displayCurrency}${formattedAmount}`;
   };
-  console.log(JSON.stringify(item, null, 2));
   return (
     <View style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>
       <View style={styles.headerView}>
@@ -98,7 +97,7 @@ const styles = StyleSheet.create({
   detailView: {
     flex: 1,
     paddingTop: '10%',
-    gap: '30%',
+    gap: 30,
   },
   outerBorder: {
     borderWidth: 0.5,
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   innerBorder: {
-    gap: '8%',
+    gap: 10,
     flexShrink: 1,
   },
   merchantText: {

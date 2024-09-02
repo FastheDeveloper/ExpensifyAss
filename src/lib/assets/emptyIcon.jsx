@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
-import { APP_COLOR } from '~/src/core/constants/colorConstants';
+import { APP_COLOR } from '~core/constants/colorConstants';
 const EmptyIcon = (props) => (
   <Svg xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
     <Path
