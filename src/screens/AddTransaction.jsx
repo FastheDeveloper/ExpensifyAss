@@ -2,7 +2,6 @@ import { InteractionManager, StyleSheet, Text, View, Keyboard, Pressable } from 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import currency from 'currency.js';
 
@@ -11,15 +10,15 @@ import { formatDateTime } from '~lib/utils/timeUtil';
 import { APP_COLOR } from '~core/constants/colorConstants';
 import { BackButton } from '~components/Button/BackButton';
 import { FONT_NAMES } from '~core/constants/fontConstants';
-import InputField from '~lib/components/InputField/InputField';
+import InputField from '~/src/lib/components/InputField/InputField';
 import { Calendar } from '~lib/components/Calendar/Calendar';
 import { withModal } from '~core/services/modalService';
 import AppButton from '~lib/components/Button/AppButton';
 import { handleAmountBlur } from '~lib/utils/fieldValidators';
 
 const AddTransaction = withModal(({ openModal, closeModal }) => {
-  const { top, bottom, left } = useSafeAreaInsets();
-  const { addTransaction, loadingTransaction } = useTransactions();
+  const { top, bottom } = useSafeAreaInsets();
+  const { addTransaction } = useTransactions();
   const navigation = useNavigation();
   const now = new Date();
   const formattedDateTime = formatDateTime(now);
@@ -55,14 +54,15 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
   useEffect(() => {
     setEdittedAmount(taskDetails.amount);
   }, [taskDetails.amount]);
+
   useEffect(() => {
-    // Compute and update transactionID once taskDetails is set
+    // Compute and update transactionID once taskDetails is set(LOCAL USE CASE)
     const transactionID = `${taskDetails.amount}${taskDetails.merchant}_${Date.now()}`;
     setTaskDetails((prevState) => ({
       ...prevState,
       transactionID: transactionID,
     }));
-  }, [taskDetails.amount, taskDetails.merchant]); // Dependencies to recalculate if these values change
+  }, [taskDetails.amount, taskDetails.merchant]);
 
   useEffect(() => {
     handleAmountBlur(taskDetails.amount, setErrorMessage);
@@ -89,12 +89,12 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
   const taskCreatedDate = (date) => {
     handleChange('created', date?.dateString);
   };
+
   const formatCurrency = (value) => {
-    // Format the value as currency, ensuring it is treated as a number
+    // Format the value as currency, ensuring it is treated as a currency
     return currency(value || 0, { precision: 2, symbol: '' }).format();
   };
 
-  console.log(taskDetails);
   const handleChange = (name, value) => {
     setTaskDetails((prevDetails) => ({
       ...prevDetails,
@@ -108,6 +108,15 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
       animationType: 'none',
     });
   }
+
+  const handleBlurFormat = () => {
+    setEdittedAmount((edittedAmount) => {
+      if (edittedAmount !== 0) {
+        return formatCurrency(edittedAmount);
+      }
+    });
+    setShowError(true);
+  };
 
   return (
     <KeyboardAwareScrollView
@@ -125,10 +134,7 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
               label={'Amount'}
               onChangeText={(text) => handleChange('amount', Number(text))}
               keyboardType="numeric"
-              onBlur={() => {
-                setEdittedAmount((edittedAmount) => formatCurrency(edittedAmount));
-                setShowError(true);
-              }}
+              onBlur={handleBlurFormat}
               onFocus={handleInputFocus}
               leftIcon={'dollar'}
               value={edittedAmount}

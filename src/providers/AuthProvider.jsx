@@ -1,9 +1,9 @@
-import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Alert } from 'react-native';
 import { useCallback } from 'react';
 import axios from 'axios';
 
-import { save, getValueFor, deleteKey } from '~lib/utils/secureStorage';
+import { save, getValueFor } from '~lib/utils/secureStorage';
 import { API_ROUTES } from '~core/constants/apiRoutes';
 import { STORAGE_KEYS } from '~core/constants/asyncKeys';
 import { withModal } from '~core/services/modalService';
@@ -80,7 +80,6 @@ function AuthProvider({ children, openModal }) {
         ERROR_MESSAGES[res.data.jsonCode] || 'An unexpected error occurred. Please try again.';
       const title = errorMessage.split('.')[0];
       const message = errorMessage.split('.')[1];
-      console.log(title);
       openModal?.(<Modal text={message} isError errorTitle={title} />, {
         transparent: true,
         animationType: 'none',

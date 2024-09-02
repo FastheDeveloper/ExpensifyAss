@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, FlatList, Pressable } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Fuse from 'fuse.js';
@@ -8,7 +8,7 @@ import { useTransactions } from '~providers/TransactionProvider';
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import { formatDateDisplay } from '~lib/utils/timeUtil';
-import InputField from '~components/InputField/InputField';
+import InputField from '~/src/lib/components/InputField/InputField';
 import { BackButton } from '~components/Button/BackButton';
 
 const AllTransactionList = () => {
@@ -39,6 +39,7 @@ const AllTransactionList = () => {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
+
     const formattedAmount = numberFormatter.format(Math.abs(amount));
 
     const displayCurrency = currency === 'USD' ? '$' : currency;

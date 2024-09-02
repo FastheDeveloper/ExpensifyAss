@@ -2,8 +2,6 @@ import React, {
   useEffect,
   useState,
   useContext,
-  ReactNode,
-  ComponentType,
   useRef,
   useCallback,
 } from 'react';
@@ -14,9 +12,8 @@ import {
   Modal,
   View,
   StyleSheet,
-  NativeEventSubscription,
+
   Platform,
-  ModalProps,
 } from 'react-native';
 
 export const ModalsContext = React.createContext({

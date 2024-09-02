@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, View, Pressable } from 'react-native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTransactions } from '~providers/TransactionProvider';

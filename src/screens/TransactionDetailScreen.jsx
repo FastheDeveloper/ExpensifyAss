@@ -7,10 +7,12 @@ import { BackButton } from '~components/Button/BackButton';
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import { formatDateDisplay } from '~lib/utils/timeUtil';
+
 const TransactionDetailScreen = ({ route }) => {
   const { item } = route.params;
-  const { top, bottom, left } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const navigation = useNavigation();
+
   const formatAmount = (amount, currency) => {
     const numberFormatter = new Intl.NumberFormat('en-US', {
       style: 'decimal',
@@ -22,6 +24,7 @@ const TransactionDetailScreen = ({ route }) => {
     const displayCurrency = currency === 'USD' ? '$' : currency;
     return `${amount < 0 ? '-' : ''}${displayCurrency}${formattedAmount}`;
   };
+
   return (
     <View style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>
       <View style={styles.headerView}>

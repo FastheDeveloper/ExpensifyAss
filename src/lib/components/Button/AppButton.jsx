@@ -1,4 +1,4 @@
-import React, { ComponentProps } from 'react';
+import React from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 

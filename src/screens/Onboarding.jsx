@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { FadeInLeft, SlideInLeft, SlideOutRight } from 'react-native-reanimated';
@@ -32,7 +32,7 @@ const onboardingSteps = [
 ];
 
 const Onboarding = () => {
-  const { top, bottom, left } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const { setHasBeenUsed } = useAuth();
 
   const [step, setStep] = useState(0);

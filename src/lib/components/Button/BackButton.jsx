@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Pressable } from 'react-native';
+import { StyleSheet, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 
