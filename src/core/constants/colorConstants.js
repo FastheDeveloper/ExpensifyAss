@@ -1,3 +1,4 @@
+// Constants describing the App's Color
 export const APP_COLOR = {
   MAIN_GREEN: '#03D47C',
   MAIN_GREY_TEXT: '#838282',

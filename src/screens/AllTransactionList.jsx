@@ -19,11 +19,13 @@ const AllTransactionList = () => {
   const [query, setQuery] = useState('');
   const [filteredTransactions, setFilteredTransactions] = useState(filteredTransactionList);
 
+  // Initialize Fuse.js for searching transactions
   const fuse = new Fuse(filteredTransactionList, {
     keys: ['merchant'],
     threshold: 0.3,
   });
 
+  // Effect to update filtered transactions based on search query
   useEffect(() => {
     if (query) {
       const results = fuse.search(query);
@@ -33,6 +35,7 @@ const AllTransactionList = () => {
     }
   }, [query, filteredTransactionList]);
 
+  // Function to format amount with currency
   const formatAmount = (amount, currency) => {
     const numberFormatter = new Intl.NumberFormat('en-US', {
       style: 'decimal',
@@ -46,6 +49,7 @@ const AllTransactionList = () => {
     return `${amount < 0 ? '-' : ''}${displayCurrency}${formattedAmount}`;
   };
 
+  // Render function for each list item
   const renderItem = useCallback(
     ({ item }) => (
       <Pressable
@@ -71,7 +75,10 @@ const AllTransactionList = () => {
     []
   );
 
+  // Header component for the FlatList
   const listHeader = <InputField placeholder={'Search by merchant '} onChangeText={setQuery} />;
+
+  // Key extractor function for FlatList
   const keyExtractor = useCallback((item) => item.transactionID, []);
 
   return (

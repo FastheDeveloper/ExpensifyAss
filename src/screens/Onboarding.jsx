@@ -13,6 +13,7 @@ import OnBoardTwo from '~lib/assets/onBoardTwo';
 import OnboardThree from '~lib/assets/onBoardThree';
 import AppButton from '../lib/components/Button/AppButton';
 
+// Array of onboarding steps, each containing an icon, title, and description
 const onboardingSteps = [
   {
     icon: <OnBoardOne width={250} height={244} />,
@@ -35,9 +36,11 @@ const Onboarding = () => {
   const { top, bottom } = useSafeAreaInsets();
   const { setHasBeenUsed } = useAuth();
 
+  // State to track the current onboarding step
   const [step, setStep] = useState(0);
-  const data = onboardingSteps[step];
+  const data = onboardingSteps[step]; // Get the current step data
 
+  // Move to the next step or finish onboarding
   const onContinue = () => {
     const isLastScreen = step === onboardingSteps.length - 1;
     if (isLastScreen) {
@@ -47,6 +50,7 @@ const Onboarding = () => {
     }
   };
 
+  // Mark onboarding as completed and save the state
   const endOnboarding = async () => {
     try {
       setHasBeenUsed(true);

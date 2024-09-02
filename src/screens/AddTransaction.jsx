@@ -16,6 +16,7 @@ import { withModal } from '~core/services/modalService';
 import AppButton from '~lib/components/Button/AppButton';
 import { handleAmountBlur } from '~lib/utils/fieldValidators';
 
+// Wrap the component with modal functionality
 const AddTransaction = withModal(({ openModal, closeModal }) => {
   const { top, bottom } = useSafeAreaInsets();
   const { addTransaction } = useTransactions();
@@ -37,6 +38,7 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
     transactionID: '',
   });
 
+  // Listen to keyboard visibility changes
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () =>
       setIsKeyboardVisible(true)
@@ -51,10 +53,12 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
     };
   }, []);
 
+  // Update edited amount when taskDetails.amount changes
   useEffect(() => {
     setEdittedAmount(taskDetails.amount);
   }, [taskDetails.amount]);
 
+  // Generate transactionID based on amount and merchant
   useEffect(() => {
     // Compute and update transactionID once taskDetails is set(LOCAL USE CASE)
     const transactionID = `${taskDetails.amount}${taskDetails.merchant}_${Date.now()}`;
@@ -64,16 +68,19 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
     }));
   }, [taskDetails.amount, taskDetails.merchant]);
 
+  // Validate amount on blur
   useEffect(() => {
     handleAmountBlur(taskDetails.amount, setErrorMessage);
   }, [taskDetails.amount]);
 
+  // Clear error message and hide error on input focus
   const handleInputFocus = () => {
     handleChange('amount', Number(''));
     setErrorMessage('');
     setShowError(false);
   };
 
+  // Close the modal and navigate to HomeScreen
   const handleClose = useCallback(() => {
     closeModal?.();
     InteractionManager.runAfterInteractions(() => {
@@ -81,20 +88,24 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
     });
   }, []);
 
+  // Add transaction
   const handleAddTransaction = async (item) => {
     setLoading(true);
     await addTransaction(item, handleClose);
   };
 
+  // Handle date change from calendar modal
   const taskCreatedDate = (date) => {
     handleChange('created', date?.dateString);
   };
 
+  // Format amount as currency
   const formatCurrency = (value) => {
     // Format the value as currency, ensuring it is treated as a currency
     return currency(value || 0, { precision: 2, symbol: '' }).format();
   };
 
+  // Update taskDetails with changed value
   const handleChange = (name, value) => {
     setTaskDetails((prevDetails) => ({
       ...prevDetails,
@@ -102,6 +113,7 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
     }));
   };
 
+  // Open calendar modal for date selection
   function OpenVerifyModal() {
     openModal?.(<Calendar onDateSelected={taskCreatedDate} />, {
       transparent: true,
@@ -109,6 +121,7 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
     });
   }
 
+  // Format amount on blur and show error
   const handleBlurFormat = () => {
     setEdittedAmount((edittedAmount) => {
       if (edittedAmount !== 0) {

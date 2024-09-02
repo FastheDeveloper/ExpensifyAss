@@ -18,6 +18,7 @@ function AuthProvider({ children, openModal }) {
   const [hasBeenUsed, setHasBeenUsed] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Check authentication status from storage
   const checkAuthStatus = useCallback(async () => {
     try {
       const [token, expiresAt] = await Promise.all([
@@ -25,6 +26,7 @@ function AuthProvider({ children, openModal }) {
         getValueFor(STORAGE_KEYS.EXPIRES_AT),
       ]);
 
+      // Determine if the token has expired
       const expiresAtDate = new Date(expiresAt);
       const hasExpired = new Date() > expiresAtDate;
 
@@ -38,6 +40,7 @@ function AuthProvider({ children, openModal }) {
     }
   }, []);
 
+  // Check if the app has been used before
   const checkBeenUsed = useCallback(async () => {
     try {
       const usedApp = await getValueFor(STORAGE_KEYS.HAS_APP_BEEN_USED);
@@ -53,6 +56,7 @@ function AuthProvider({ children, openModal }) {
     checkAuthStatus();
   }, [checkAuthStatus]);
 
+  // Handle authentication response and store auth data
   const handleAuthResponse = async (res, expiresAt, setAuthToken, setIsAuthenticated) => {
     const ERROR_MESSAGES = {
       401: 'Incorrect password. Please try again.',
@@ -89,6 +93,7 @@ function AuthProvider({ children, openModal }) {
     }
   };
 
+  // Authenticate user by sending credentials to the server
   const authenticateUser = async (userDetails) => {
     const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000 + 50 * 60 * 1000);
     try {
@@ -117,6 +122,7 @@ function AuthProvider({ children, openModal }) {
     }
   };
 
+  // Logout user by clearing auth data
   const logout = useCallback(async () => {
     try {
       await Promise.all([save(STORAGE_KEYS.AUTH_TOKEN, ''), save(STORAGE_KEYS.EXPIRES_AT, '')]);
@@ -131,6 +137,7 @@ function AuthProvider({ children, openModal }) {
     return <ActivityIndicator />;
   }
 
+  // Provide auth context to children components
   return (
     <AuthContext.Provider
       value={{

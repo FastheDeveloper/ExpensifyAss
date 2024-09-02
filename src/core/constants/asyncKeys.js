@@ -1,3 +1,4 @@
+// Constants describing the Secure Storage keys
 export const STORAGE_KEYS = {
   AUTH_TOKEN: 'AUTH_TOKEN',
   EXPIRES_AT: 'EXPIRES_AT',

@@ -21,16 +21,21 @@ export default function StackNavigator() {
   const { isAuthenticated, hasBeenUsed } = useAuth();
   const [isOffline, setIsOffline] = useState(false);
 
+  // Setting up a NetInfo listener to track network connectivity
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
       setIsOffline(!state.isConnected);
     });
+
+    // Cleanup function to remove the NetInfo listener on component unmount
     return () => {
       unsubscribe();
     };
   });
 
+  // Function to determine which screens to render based on conditions
   const renderApp = () => {
+    // Array of conditional screen configurations
     const list = [
       {
         cond: isOffline,
@@ -69,7 +74,10 @@ export default function StackNavigator() {
       },
     ];
 
+    // Return the first node where condition is true
     return list.find(({ cond }) => !!cond)?.node;
   };
+
+  // Render the Stack Navigator with the appropriate screens
   return <Stack.Navigator screenOptions={options}>{renderApp()}</Stack.Navigator>;
 }

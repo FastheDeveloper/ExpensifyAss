@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { withModal } from '~/src/core/services/modalService';
 
+// Calendar component wrapped with modal functionality
 export const Calendar = withModal(({ onDateSelected, closeModal }) => {
   const { top } = useSafeAreaInsets();
   return (

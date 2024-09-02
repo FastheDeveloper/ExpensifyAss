@@ -25,6 +25,7 @@ const LoginScreen = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showError, setShowError] = useState(false);
 
+  // Listeners for keyboard visibility to adjust layout
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () =>
       setIsKeyboardVisible(true)
@@ -39,14 +40,17 @@ const LoginScreen = () => {
     };
   }, []);
 
+  // Validate email when it changes
   useEffect(() => {
     handleEmailBlur(userDetails.email, setErrorMessage);
   }, [userDetails.email]);
 
+  // Form validation function
   const isFormValid = () => {
     return validateEmail(userDetails.email) && allFieldsFilled(userDetails);
   };
 
+  // Handler for input changes
   const handleChange = (name, value) => {
     setUserDetails((prevDetails) => ({
       ...prevDetails,
@@ -54,6 +58,7 @@ const LoginScreen = () => {
     }));
   };
 
+  // Reset error messages when an input field is focused
   const handleInputFocus = () => {
     setErrorMessage('');
     setShowError(false);

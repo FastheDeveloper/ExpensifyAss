@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useContext,
-  useRef,
-  useCallback,
-} from 'react';
+import React, { useEffect, useState, useContext, useRef, useCallback } from 'react';
 import {
   BackHandler,
   InteractionManager,
@@ -12,7 +6,6 @@ import {
   Modal,
   View,
   StyleSheet,
-
   Platform,
 } from 'react-native';
 
