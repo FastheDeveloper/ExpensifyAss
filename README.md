@@ -16,11 +16,9 @@
 
 1. Open the terminal in the project directory and run `yarn` to install all dependencies
 
-2. Start the development server by running `yarn start`
+2. Run `yarn storybook:ios` to open the Story on ios or `yarn storybook:android` to open the Story on android
 
-3. Run `yarn storybook:ios` to open the Story on ios or `yarn storybook:android` to open the story on android
-
-4. Scan QR code in terminal with physical device to open on your phone
+3. Scan QR code in terminal with physical device to open on your phone
 
 ## Development Process
 
@@ -68,7 +66,7 @@ https://www.figma.com/design/6cck8nl8XiIbBm8rhQP85r/Expensify-App?m=auto&t=cgIVu
   - Extensive testing
 
 - Monday `Finalising `
-  - Testing accross
+  - Testing
   - Documentation
   - Commenting
 
