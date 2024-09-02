@@ -17,10 +17,13 @@ function TransactionProvider({ children, openModal, closeModal }) {
   const [filteredTransactionList, setFilteredTransactionList] = useState([]);
   const [loadingTransaction, setLoadingTransactions] = useState(false);
   const { authToken, logout } = useAuth();
+
+  // Sort transactions by inserted date
   const sortedTransactions = useMemo(() => {
     return sortTransactionsByInsertedDate([...transactionList]);
   }, [transactionList]);
 
+  // Handle verification and logout if needed
   const handleVerify = useCallback(() => {
     closeModal?.();
     InteractionManager.runAfterInteractions(() => {
@@ -28,11 +31,13 @@ function TransactionProvider({ children, openModal, closeModal }) {
     });
   }, []);
 
+  // Update filteredTransactionList whenever sortedTransactions changes
   useEffect(() => {
     // Update filteredTransactionList only when sortedTransactions changes
     setFilteredTransactionList(sortedTransactions);
   }, [sortedTransactions]);
 
+  // Handle response for adding or updating transactions
   const handleSetResponse = async (res, newTransaction, closeFunction) => {
     const updatedAmount =
       newTransaction.amount < 0
@@ -89,6 +94,7 @@ function TransactionProvider({ children, openModal, closeModal }) {
     }
   };
 
+  // Handle response for fetching transactions
   const handleGetResponse = async (res) => {
     if (res.data.jsonCode === 200) {
       setTransactionList(res.data?.transactionList);
@@ -120,6 +126,7 @@ function TransactionProvider({ children, openModal, closeModal }) {
     }
   };
 
+  // Fetch all transactions from the server
   const fetchAllTransactions = async () => {
     try {
       setLoadingTransactions(true);
@@ -140,6 +147,7 @@ function TransactionProvider({ children, openModal, closeModal }) {
     }
   };
 
+  // Add a new transaction
   const addTransaction = async (newTransaction, closeFunction) => {
     try {
       const res = await axios.get(
@@ -162,7 +170,9 @@ function TransactionProvider({ children, openModal, closeModal }) {
       );
     }
   };
+
   return (
+    // Provide transaction context to children components
     <TransactionContext.Provider
       value={{
         transactionList,

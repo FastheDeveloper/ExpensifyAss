@@ -5,6 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 
+// InputField component with optional icons and password visibility toggle
 const InputField = ({ leftIcon, label, rightIcon, ...inputProps }) => {
   const [hide, setHide] = useState(true);
   const [isFocused, setIsFocused] = useState(false);

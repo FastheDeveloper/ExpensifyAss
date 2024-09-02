@@ -5,7 +5,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import { APP_COLOR } from '~core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 
+// Custom button component with support for loading state and optional icons
 const AppButton = ({ loading, leftIcon, label, rightIcon, ...pressableProps }) => {
+  // Render content based on loading state
   const content = loading ? (
     <>
       <View style={styles.loaderWrapper}>

@@ -4,10 +4,12 @@ import { Animated, View, Easing, StyleSheet } from 'react-native';
 
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 
+// Component that animates a glowing effect on its children
 const GlowView = ({ style, children }) => {
   const [glowAnim] = useState(new Animated.Value(0.3));
 
   useEffect(() => {
+    // Looping animation sequence for the glow effect
     Animated.loop(
       Animated.sequence([
         Animated.timing(glowAnim, {
@@ -37,6 +39,7 @@ const GlowView = ({ style, children }) => {
   );
 };
 
+// Component that uses GlowView to show a loading animation
 export const LoadingRow = () => (
   <View style={styles.container}>
     <GlowView>

@@ -9,10 +9,12 @@ import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import { formatDateDisplay } from '~lib/utils/timeUtil';
 
 const TransactionDetailScreen = ({ route }) => {
+  // Destructure 'item' from route parameters
   const { item } = route.params;
   const { top, bottom } = useSafeAreaInsets();
   const navigation = useNavigation();
 
+  // Function to format the transaction amount with currency
   const formatAmount = (amount, currency) => {
     const numberFormatter = new Intl.NumberFormat('en-US', {
       style: 'decimal',

@@ -7,8 +7,11 @@ import { APP_COLOR } from '~core/constants/colorConstants';
 import { withModal } from '~core/services/modalService';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 
+// Modal component for displaying status
 export const Modal = withModal(({ closeModal, text, isError, closeFunc, errorTitle }) => {
   const insets = useSafeAreaInsets();
+
+  // Calculate top margin based on the platform and safe area insets
   const marginTop = Platform.select({
     ios: 115 + insets.top,
     android: 115 + insets.top,

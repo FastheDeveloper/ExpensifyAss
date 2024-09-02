@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import AppButton from './AppButton';
 
+// Meta configuration for Storybook stories of the AppButton component
 const AppButtonMeta = {
   title: 'Button',
   component: AppButton,
@@ -24,8 +25,10 @@ const AppButtonMeta = {
 
 export default AppButtonMeta;
 
+// Default story configuration
 export const Default = {};
 
+// Story with only text
 export const TextOnlyButton = {
   args: {
     label: 'Text Button',
@@ -38,6 +41,7 @@ export const TextOnlyButton = {
   },
 };
 
+// Story with a left icon
 export const WithLeftIcon = {
   args: {
     label: 'With Left Icon',
@@ -51,6 +55,7 @@ export const WithLeftIcon = {
   },
 };
 
+// Story with a right icon
 export const WithRightIcon = {
   args: {
     label: 'With Right Icon',
@@ -64,6 +69,7 @@ export const WithRightIcon = {
   },
 };
 
+// Story with both left and right icons
 export const WithBothIcons = {
   args: {
     label: 'With Both Icons',

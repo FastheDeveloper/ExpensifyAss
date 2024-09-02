@@ -3,6 +3,7 @@ import React from 'react';
 
 import { CheckBox } from './Checkbox';
 
+// Meta configuration for Storybook stories of the CheckBox component
 const CheckButton = {
   title: 'CheckBox',
   component: CheckBox,
@@ -23,8 +24,10 @@ const CheckButton = {
 
 export default CheckButton;
 
+// Story configuration for the checkbox in its selected state
 export const SelectedButton = {};
 
+// Story configuration for the checkbox in its unselected state
 export const unselectedButton = {
   args: {
     selected: false,

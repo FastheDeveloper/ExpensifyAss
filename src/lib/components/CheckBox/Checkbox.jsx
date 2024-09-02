@@ -4,6 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 
+// CheckBox component to toggle selection state
 export const CheckBox = ({ onPress, selected }) => {
   const styles = StyleSheet.create({
     container: {

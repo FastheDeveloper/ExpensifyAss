@@ -1,19 +1,21 @@
+// Validate email address format using a regex
 export const validateEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
+// Validate if the amount is a number
 export const validateAmount = (amount) => {
   return !isNaN(Number(amount)) && typeof amount === 'number';
 };
 
-// Function to check if all fields are filled
+// Check if all required fields are filled
 export const allFieldsFilled = (details) => {
-  // Check if email is valid and other fields are non-empty
+  // Ensure the email is valid and the password field is not empty
   return validateEmail(details.email) && details.password.trim() !== '';
 };
 
-// Function to handle email blur
+// Handle blur event for email input field
 export const handleEmailBlur = (email, setErrorMessage) => {
   if (!validateEmail(email) && email.trim() !== '') {
     setErrorMessage('Invalid email address');
@@ -22,6 +24,7 @@ export const handleEmailBlur = (email, setErrorMessage) => {
   }
 };
 
+// Handle blur event for amount input field
 export const handleAmountBlur = (amount, setErrorMessage) => {
   if (!validateAmount(amount)) {
     setErrorMessage('Invalid amount entered. Must be a number');

@@ -9,10 +9,12 @@ import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import { formatDateDisplay } from '~lib/utils/timeUtil';
 import EmptyIcon from '~lib/assets/emptyIcon';
 
+// Component for displaying a list of transactions
 const TaskList = () => {
   const { loadingTransaction, filteredTransactionList } = useTransactions();
   const navigation = useNavigation();
 
+  // Format amount based on currency and amount value
   const formatAmount = (amount, currency) => {
     const numberFormatter = new Intl.NumberFormat('en-US', {
       style: 'decimal',
@@ -25,6 +27,7 @@ const TaskList = () => {
     return `${amount < 0 ? '-' : ''}${displayCurrency}${formattedAmount}`;
   };
 
+  // Render each transaction item
   const renderItem = useCallback(
     ({ item }) => (
       <Pressable
@@ -50,6 +53,7 @@ const TaskList = () => {
     []
   );
 
+  // Header component for the transaction list
   const listHeader = () => (
     <View style={styles.listHeaderView}>
       <Text style={styles.listHeaderTextTitle}>Transactions</Text>
@@ -60,8 +64,11 @@ const TaskList = () => {
       </Text>
     </View>
   );
+
+  // Extract unique key for each transaction item
   const keyExtractor = useCallback((item) => item.transactionID, []);
 
+  // Loading state with placeholder rows
   if (loadingTransaction) {
     return (
       <View style={styles.transactionView}>
@@ -77,6 +84,7 @@ const TaskList = () => {
     );
   }
 
+  // No transactions state with empty view
   if (filteredTransactionList.length === 0) {
     return (
       <View style={styles.transactionView}>
@@ -91,6 +99,7 @@ const TaskList = () => {
     );
   }
 
+  // Render the transaction list
   return (
     <FlatList
       data={filteredTransactionList}
