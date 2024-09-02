@@ -1,5 +1,6 @@
-import { Fragment } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import NetInfo from '@react-native-community/netinfo';
 
 import { BackButton } from '~components/Button/BackButton';
 import HomeScreen from 'src/screens/HomeScreen';
@@ -7,6 +8,9 @@ import LoginScreen from 'src/screens/LoginScreen';
 import AddTransaction from 'src/screens/AddTransaction';
 import AllTransactionList from 'src/screens/AllTransactionList';
 import TransactionDetailScreen from 'src/screens/TransactionDetailScreen';
+import NoInternet from 'src/screens/NoInternet';
+import Onboarding from 'src/screens/Onboarding';
+
 import { useAuth } from '~providers/AuthProvider';
 
 const Stack = createStackNavigator();
@@ -15,10 +19,36 @@ const options = {
 };
 
 export default function StackNavigator() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, hasBeenUsed } = useAuth();
+  const [isOffline, setIsOffline] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsOffline(!state.isConnected);
+    });
+    return () => {
+      unsubscribe();
+    };
+  });
 
   const renderApp = () => {
     const list = [
+      {
+        cond: isOffline,
+        node: (
+          <Fragment>
+            <Stack.Screen name={'NoInternet'} component={NoInternet} />
+          </Fragment>
+        ),
+      },
+      {
+        cond: !hasBeenUsed,
+        node: (
+          <Fragment>
+            <Stack.Screen name={'Onboarding'} component={Onboarding} />
+          </Fragment>
+        ),
+      },
       {
         cond: !isAuthenticated,
         node: (

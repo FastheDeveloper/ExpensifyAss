@@ -15,7 +15,7 @@ const InputField = ({ leftIcon, label, rightIcon, ...inputProps }) => {
       <View style={[styles.inputContainer, isFocused && styles.selectedField]}>
         {leftIcon && (
           <View style={styles.leftIcon} testID="left-icon">
-            <FontAwesome name={leftIcon} size={20} />
+            <FontAwesome name={leftIcon} size={16} color={APP_COLOR.MAIN_GREY_TEXT} />
           </View>
         )}
 
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontFamily: FONT_NAMES.INTER_MEDIUM,
-    marginVertical: 8,
+    marginVertical: 4,
     color: APP_COLOR.MAIN_GREY,
   },
   inputContainer: {
