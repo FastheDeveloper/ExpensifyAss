@@ -109,6 +109,6 @@ function formatDateDisplay(dateString) {
   hours = hours ? hours : 12; // Convert 0 to 12 for midnight
 
   // Construct the final formatted string
-  return `${formattedDay} ${month} ,${year} at ${hours}:${minutes} ${ampm}`;
+  return `${formattedDay} ${month} ,${year} `;
 }
 export { sortTransactionsByInsertedDate, formatDateTime, getGreeting, formatDateDisplay };
