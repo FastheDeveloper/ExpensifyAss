@@ -28,7 +28,7 @@ https://www.figma.com/design/6cck8nl8XiIbBm8rhQP85r/Expensify-App?m=auto&t=cgIVu
 
 ### Tasks and Duration
 
-- Tuesday `Recieved Accessment`
+- Tuesday `Received Assessment`
 
   - Figuring out the API
   - Translating API into low fidelity design
@@ -51,7 +51,7 @@ https://www.figma.com/design/6cck8nl8XiIbBm8rhQP85r/Expensify-App?m=auto&t=cgIVu
   - Context Provider Setup
   - Component Development
   - Login Screen Design and Implementation
-  - HomeScreen Design and Implentation
+  - HomeScreen Design and Implementation
   - Splashscreen animation in Adobe After effects and generating Json format
   - Splashscreen implementation
   - Extensive testing
@@ -119,7 +119,7 @@ To create a more comprehensive and engaging application, I implemented several f
      - Prompts users to check and reestablish their connection
    - Benefits:
      - Enhances app reliability and user trust
-     - Prevents confusion or frustration from unexplained app behavior
+     - Prevents confusion or frustration from unexplained app behaviour
      - Guides users towards resolving connectivity issues
 
 ### Challenges and Solutions
@@ -141,7 +141,7 @@ To create a more comprehensive and engaging application, I implemented several f
 
   - A millisecond lag was observed between receiving user input and searching through the list.
   - While this lag was minimal, it had the potential to become frustrating for users over time.
-  - I needed to decide between using the existing TaskList component or creating a specialized component for the Search Screen.
+  - I needed to decide between using the existing TaskList component or creating a specialised component for the Search Screen.
 
 - Consideration:
   Both options had minimal impact on Code readability, Ease of understanding, Rendering performance, however, I deemed the user experience impact of the lag as significant.
