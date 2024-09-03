@@ -84,8 +84,8 @@ const AllTransactionList = () => {
   return (
     <View style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>
       <View style={styles.headerView}>
-        <BackButton onPress={() => navigation.goBack()} />
-        <Text style={styles.headerText}>Add Transaction</Text>
+        <BackButton onPress={() => navigation?.goBack()} />
+        <Text style={styles.headerText}>Transaction List</Text>
       </View>
       <View style={{ marginTop: '5%' }}>
         <InputField placeholder={'Search by merchant '} onChangeText={setQuery} />

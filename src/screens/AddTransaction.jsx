@@ -138,7 +138,7 @@ const AddTransaction = withModal(({ openModal, closeModal }) => {
       showsVerticalScrollIndicator={false}>
       <View style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>
         <View style={styles.headerView}>
-          <BackButton onPress={() => navigation.goBack()} />
+          <BackButton onPress={() => navigation?.goBack()} />
           <Text style={styles.headerText}>Add Transaction</Text>
         </View>
         <View style={styles.contentView}>

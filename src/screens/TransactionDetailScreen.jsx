@@ -30,7 +30,7 @@ const TransactionDetailScreen = ({ route }) => {
   return (
     <View style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>
       <View style={styles.headerView}>
-        <BackButton onPress={() => navigation.goBack()} />
+        <BackButton onPress={() => navigation?.goBack()} />
         <Text style={styles.headerText}>Transaction Details</Text>
       </View>
       <View style={styles.detailView}>

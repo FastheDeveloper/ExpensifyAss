@@ -133,3 +133,26 @@ To create a more comprehensive and engaging application, I implemented several f
 - Solution:
   - Consulted with Rory to obtain the official token expiration time (2 hours)
   - Set the application's token refresh time to 1 hour and 55 minutes, this provides a 5-minute safety buffer before actual expiration
+
+#### TaskList Search Optimization
+
+- Challenge:
+  When implementing the task list component in the Search Screen, I encountered a performance issue:
+
+  - A millisecond lag was observed between receiving user input and searching through the list.
+  - While this lag was minimal, it had the potential to become frustrating for users over time.
+  - I needed to decide between using the existing TaskList component or creating a specialized component for the Search Screen.
+
+- Consideration:
+  Both options had minimal impact on Code readability, Ease of understanding, Rendering performance, however, I deemed the user experience impact of the lag as significant.
+
+- Solution:
+  After careful consideration, I decided to:
+
+  - Create a dedicated TaskList component specifically for the Search Screen.
+  - Implement immediate search response as the user types.
+
+- Benefits:
+  - Enhanced Performance: Eliminates the millisecond lag, providing instant feedback to user input.
+  - Improved User Experience: Ensures user satisfaction by delivering smooth and responsive search functionality.
+  - Minimal Trade-offs: Achieves optimization without negatively impacting the application's overall structure or maintainability.

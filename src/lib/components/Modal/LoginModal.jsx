@@ -20,7 +20,7 @@ export const LoginModal = withModal(({ closeModal, text, isError, auth, errorTit
 
   return (
     <Fragment>
-      <Pressable style={s.root} onPress={closeModal}>
+      <Pressable style={s.root} onPress={auth}>
         <View style={[s.container, { marginVertical: marginTop * 1.3, marginHorizontal: '10%' }]}>
           <View
             style={[
