@@ -8,9 +8,9 @@ import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import { useAuth } from '~providers/AuthProvider';
 import { save } from '~lib/utils/secureStorage';
 import { STORAGE_KEYS } from '~core/constants/asyncKeys';
-import OnBoardOne from '~lib/assets/onBoardOne';
-import OnBoardTwo from '~lib/assets/onBoardTwo';
-import OnboardThree from '~lib/assets/onBoardThree';
+import OnBoardOne from '~lib/assets/svgs/onBoardOne';
+import OnBoardTwo from '~lib/assets/svgs/onBoardTwo';
+import OnboardThree from '~lib/assets/svgs/onBoardThree';
 import AppButton from '../lib/components/Button/AppButton';
 
 // Array of onboarding steps, each containing an icon, title, and description

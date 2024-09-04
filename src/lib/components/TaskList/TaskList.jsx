@@ -7,7 +7,7 @@ import { LoadingRow } from '~components/LoadingRows/LoadingRow';
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
 import { formatDateDisplay } from '~lib/utils/timeUtil';
-import EmptyIcon from '~lib/assets/emptyIcon';
+import EmptyIcon from '~lib/assets/svgs/emptyIcon';
 
 // Component for displaying a list of transactions
 const TaskList = () => {

@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '~providers/AuthProvider';
 import { useTransactions } from '~providers/TransactionProvider';
-import UserIcon from '~lib/assets/userIcon';
+import UserIcon from '~lib/assets/svgs/userIcon';
 import { APP_COLOR } from '~core/constants/colorConstants';
 import { getGreeting } from '~lib/utils/timeUtil';
 import { FONT_NAMES } from '~core/constants/fontConstants';

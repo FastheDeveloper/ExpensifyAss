@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { APP_COLOR } from '~/src/core/constants/colorConstants';
 import { FONT_NAMES } from '~/src/core/constants/fontConstants';
-import NoInternetSvg from '~lib/assets/noInternetIcon';
+import NoInternetSvg from '~lib/assets/svgs/noInternetIcon';
 
 // This component displays a message and an icon when the device has no internet connection.
 const NoInternet = () => {

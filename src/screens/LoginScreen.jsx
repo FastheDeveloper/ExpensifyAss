@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import AppIcon from '~lib/assets/appIcon';
-import AppName from '~lib/assets/appName';
+import AppIcon from '~lib/assets/svgs/appIcon';
+import AppName from '~lib/assets/svgs/appName';
 import { APP_COLOR } from '~core/constants/colorConstants';
 import InputField from '~/src/lib/components/InputField/InputField';
 import AppButton from '~components/Button/AppButton';
