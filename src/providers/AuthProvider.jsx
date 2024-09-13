@@ -61,7 +61,7 @@ function AuthProvider({ children, openModal }) {
     const ERROR_MESSAGES = {
       401: 'Incorrect password. Please try again.',
       402: 'Incorrect password. Please try again.',
-      404: 'Account does not exist. Please check your credentials.',
+      404: 'Incorrect password. Please try again.',
     };
 
     if (res.data.jsonCode === 200) {
