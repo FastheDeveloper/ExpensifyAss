@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Fuse from 'fuse.js';
 import { useNavigation } from '@react-navigation/native';
@@ -17,23 +17,25 @@ const AllTransactionList = () => {
 
   const navigation = useNavigation();
   const [query, setQuery] = useState('');
-  const [filteredTransactions, setFilteredTransactions] = useState(filteredTransactionList);
+  // const [filteredTransactions, setFilteredTransactions] = useState(filteredTransactionList);
 
   // Initialize Fuse.js for searching transactions
-  const fuse = new Fuse(filteredTransactionList, {
-    keys: ['merchant'],
-    threshold: 0.3,
-  });
+  const fuse = useMemo(
+    () =>
+      new Fuse(filteredTransactionList, {
+        keys: ['merchant'],
+        threshold: 0.3,
+      }),
+    [filteredTransactionList]
+  );
 
-  // Effect to update filtered transactions based on search query
-  useEffect(() => {
+  // Memoize filtered transactions
+  const filteredTransactions = useMemo(() => {
     if (query) {
-      const results = fuse.search(query);
-      setFilteredTransactions(results.map((result) => result.item));
-    } else {
-      setFilteredTransactions(filteredTransactionList);
+      return fuse.search(query).map((result) => result.item);
     }
-  }, [query, filteredTransactionList]);
+    return filteredTransactionList;
+  }, [query, fuse, filteredTransactionList]);
 
   // Function to format amount with currency
   const formatAmount = (amount, currency) => {
