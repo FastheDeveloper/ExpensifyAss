@@ -17,7 +17,6 @@ const AllTransactionList = () => {
 
   const navigation = useNavigation();
   const [query, setQuery] = useState('');
-  // const [filteredTransactions, setFilteredTransactions] = useState(filteredTransactionList);
 
   // Initialize Fuse.js for searching transactions
   const fuse = useMemo(
