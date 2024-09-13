@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, useMemo } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import NetInfo from '@react-native-community/netinfo';
 
@@ -33,10 +33,9 @@ export default function StackNavigator() {
     };
   });
 
-  // Function to determine which screens to render based on conditions
-  const renderApp = () => {
-    // Array of conditional screen configurations
-    const list = [
+  // Memoize the list of screen configurations
+  const screenList = useMemo(
+    () => [
       {
         cond: isOffline,
         node: (
@@ -72,12 +71,15 @@ export default function StackNavigator() {
           </Fragment>
         ),
       },
-    ];
+    ],
+    [isOffline, hasBeenUsed, isAuthenticated]
+  );
 
-    // Return the first node where condition is true
-    return list.find(({ cond }) => !!cond)?.node;
-  };
+  // Memoize the renderApp function
+  const renderApp = useMemo(() => {
+    return screenList.find(({ cond }) => !!cond)?.node;
+  }, [screenList]);
 
   // Render the Stack Navigator with the appropriate screens
-  return <Stack.Navigator screenOptions={options}>{renderApp()}</Stack.Navigator>;
+  return <Stack.Navigator screenOptions={options}>{renderApp}</Stack.Navigator>;
 }

@@ -28,7 +28,7 @@ const HomeScreen = () => {
 
   return (
     <View style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>
-      {/* <Text onPress={() => logout()}>logout</Text> */}
+      {/* <Text onPress={() => logout()}>log out</Text> */}
       <View style={styles.header}>
         <View style={styles.headerIcon}>
           <UserIcon height={45} width={50} />
